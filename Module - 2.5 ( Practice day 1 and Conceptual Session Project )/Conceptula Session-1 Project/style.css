@@ -1,0 +1,134 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.menu-container{
+    background-color: rgb(33, 31, 31);
+    color: white;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo{
+    width: 120px;
+}
+.menu-list{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.item{
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 7px;
+}
+.item:hover{
+    color: red;
+}
+.banner-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90vh;
+    color: white;
+    background-image: url(images/background.png), linear-gradient(45deg , rgb(8,8,8),rgb(52, 50, 50));
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.banner-img{
+    width: 300px;
+}
+.title{
+    font-size: 55px;
+    font-weight: bold;
+}
+.description{
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.btn{
+    border: none;
+    padding: 14px 24px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+}
+.section-title{
+    text-align: center;
+    margin: 20px;
+}
+.aboutus-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+
+}
+.service-container{
+    padding: 50px;
+    color: white;
+    background-image: url(images/background.png), linear-gradient(45deg , rgb(8,8,8),rgb(52, 50, 50));
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.icon{
+    width: 70px;
+    padding-bottom: 10px;
+}
+.box{
+    width: 200px;
+    height: 280px;
+    box-shadow: 4px 4px 15px gray ;
+    padding: 20px;
+    background-color: black;
+    text-align: center;
+}
+.box-description{
+    padding: 10px;
+    font-size: 15px;
+}
+.box-btn{
+    background-color: gray;
+    padding: 10px 22px;
+}
+.box-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+footer{
+    background-color: rgb(8, 8, 8);
+    line-height: 1.8rem;
+    color: white;
+}
+.footer-container{
+    height: 60vh;
+    width: 75%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0px auto;
+}
+.logo-footer-img{
+    width: 170px;
+}
+.logo-footer{
+    width: 20%;
+}
+.copy{
+    width: 80%;
+    margin: 0px auto;
+    text-align: center;
+    border-top: 2px gray solid;
+}
+.copy p{
+    padding: 10px 0px;
+    padding-bottom: 40px;
+}

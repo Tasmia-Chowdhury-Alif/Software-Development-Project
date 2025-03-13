@@ -1,0 +1,250 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    /* background-color: black; */
+}
+
+.logo {
+    width: 100px;
+}
+
+nav {
+    background-color: rgb(200, 204, 204);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 115px;
+}
+
+.lst {
+    list-style-type: none;
+    transition: 0.3s;
+}
+
+.lst:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.manu-container {
+    font-size: 22px;
+    display: flex;
+    gap: 15px;
+}
+
+.banner-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+}
+
+.rigth-banner-image {
+    height: 800px;
+    width: 600px;
+}
+
+.banner-left {
+    width: 500px;
+    line-height: 2;
+}
+
+.btn {
+    font-size: 15px;
+    padding: 18px 30px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    /* border-radius: 20%; */
+
+    /* background-color: #4CAF50; */
+    /* Green background */
+    text-align: center;
+    /* Centered text */
+    display: inline-block;
+    /* Make the button inline */
+    margin: 20px 4px;
+    /* Margins */
+    border-radius: 12px;
+    /* Rounded corners */
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #16c41f;
+    /* Darker green on hover */
+}
+
+.hire-btn {
+    background-color: rgb(52, 20, 82);
+}
+
+.project-btn {
+    background-color: rgb(7, 113, 206);
+}
+
+#title {
+    font-size: 45px;
+}
+
+#designation {
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.service-title{
+    margin-top: 40px;
+    text-align: center;
+    font-size: 60px;
+}
+
+.service-card{
+    width: 350px;
+    height: 458px;
+    /* border: 1px solid black; */
+    box-shadow: 4px 4px 8px rgb(126, 214, 255);
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+.service-img{
+    margin-top: 15px;
+    width: 280px;
+    height: 250px;
+    border-radius: 15px;
+}
+.service-card-btn{
+    padding: 15px 0px;
+    border: none;
+    font-size: 18px;
+    background-color: rgb(77, 225, 146);
+    border-radius: 12px;
+}
+a{
+    text-decoration: none;
+    color: rgb(3, 3, 101);
+    padding: 15px 25px;
+}
+.service-card-btn:hover{
+    background-color: rgb(3, 3, 101);
+    transition: 0.3;
+}
+.service-card-btn a:hover{
+    color: rgb(77, 225, 146);
+    transition: 0.3;
+
+}
+
+.service-descripton{
+    margin: 15px;
+}
+
+.services{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.contact_us{
+    padding: 50px;
+    width: 550px;
+    margin: auto;
+    box-shadow: 4px 4px 30px gray;
+    text-align: center;
+    margin-bottom: 100px;
+}
+.input_box {
+    padding: 15px;
+    width: 50%;
+    margin-top: 10px;
+}
+.message{
+    padding: 15px;
+    width: 40%;
+    height: 100px;
+    margin-top: 15px;
+}
+.submit_btn{
+    width: 25%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: rgb(2, 208, 240);
+    color: rgb(3, 3, 101);
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;
+}
+.submit_btn:hover{
+    background-color: rgb(3, 3, 101);
+    color: rgb(2, 208, 240);
+    transition: 0.3s;
+
+}
+
+.footer_contrainer{
+    background-color: #111;
+    width: 100%;
+    padding: 70px 30px 20px;
+    padding-bottom: 100px;
+    color: white;
+}
+.social{
+    display: flex;
+    justify-content: center;
+}
+.social a{
+    text-decoration: none;
+    padding: 15px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 50%;
+}
+.social a i{
+    font-size: 2em;
+    color: black;
+    opacity: 0.9;
+}
+.social a:hover{
+    background-color: black;
+    transition: 0.5s;
+}
+.social a:hover i{
+    /* color: white; */
+    color: rgb(0, 159, 251);
+    transition: 0.5s;
+}
+.footer_nav{
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    padding-top: 20px;
+    font-size: 20px;
+}
+.footer_nav a{
+    text-decoration: none;
+    color: white;
+    opacity: 0.6;
+}
+.footer_nav a:hover{
+    opacity: 1;
+}
+
+.footer_copy{
+    color: white;
+    background-color: black;
+    padding: 20px;
+    text-align: center;
+}
+
+@media only screen and (min-width:320px) and (max-width:425px){
+    /* body{
+        background-color: #111;
+    } */
+}
+@media only screen and (min-width:426px) and (max-width:992px){
+    /* body{
+        background-color: #bbb76b;
+    } */
+}
