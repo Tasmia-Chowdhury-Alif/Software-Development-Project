@@ -43,3 +43,13 @@ def Student_form(request):
         form = StudentData()
 
     return render(request, 'first_app/django_form.html', {'form' : form})
+
+def Student_form(request):
+    if request.method == 'POST':
+        form = PasswardValidationProject(request.POST, request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else:
+        form = PasswardValidationProject()
+
+    return render(request, 'first_app/django_form.html', {'form' : form})
