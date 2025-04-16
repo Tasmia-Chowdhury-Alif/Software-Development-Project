@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from . forms import contactForm, studentForm, passwardValidation
 
 # Create your views here.
 def home(request):
@@ -14,5 +15,44 @@ def about(request):
     return render(request, 'first_app/about.html', context={'name' : name, 'email' : email})
         # return render(request, 'first_app/about.html')
 
-def submint_form(request):
+def submit_form(request):
     return render(request, 'first_app/form.html')
+
+def django_form(request):
+    if request.method == 'POST':
+        form = contactForm(request.POST, request.FILES)
+        if form.is_valid():
+            # file = form.cleaned_data['file']
+            # with open('./first_app/upload/' + file.name, 'wb+') as destination:
+            #     for chunk in file.chunks():
+            #         destination.write(chunk)
+            print(form.cleaned_data)
+    else :
+        form = contactForm()
+    # if request.method == 'POST' :
+    #     name = request.POST.get('name')
+    #     email = request.POST.get('email')
+    #     print(name)
+    #     print(email)
+
+    return render(request, 'first_app/django_form.html', context={'form' : form})
+
+def student_form(request):
+    if request.method == 'POST':
+        form = studentForm(request.POST, request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else :
+        form = studentForm()
+
+    return render(request, 'first_app/django_form.html', context={'form' : form})
+
+def passward_form(request):
+    if request.method == 'POST':
+        form = passwardValidation(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else :
+        form = passwardValidation()
+
+    return render(request, 'first_app/django_form.html', context={'form' : form})
