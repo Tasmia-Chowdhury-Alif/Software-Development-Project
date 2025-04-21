@@ -7,4 +7,4 @@ class Author(models.Model):
     phone_no = models.CharField(max_length=12)
 
     def __str__(self):
-        return f"{self.id} {self.name}"
+        return f"{self.name}"

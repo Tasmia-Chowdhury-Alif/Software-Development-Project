@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="my-5"> 
+        {% for post in data %}
+            <div class="card w-50 mx-auto p-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content }}</p>
+                    <p>Author : {{ post.author.name }}</p>
+                    <p>Category : 
+                        {% for cat in post.category.all %}
+                            <button class="btn btn-info m-2">{{ cat.name }}</button>
+                        {% endfor %}
+                    </p>
+                    <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+                <!-- provide a image field in the Posts and update the database -->
+                <!-- <img src="..." class="card-img-bottom" alt="..."> --> 
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
