@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello This is first_app Home Page</h1>
+    <h1>Name : {{ name }}</h1>
+    <h1>age : {{ age }}</h1>
+
+    {% if age >= 20 %}
+      <h2>You are Mature</h2>
+    {% elif age >= 15 and age <= 20 %}
+      <h2>You are not Mature yet</h2>
+    {% else %}
+      <h2>You are a child</h2>
+    {% endif %}
+
+    {% for i in courses %}
+      <h1>{{ i.id }}</h1>
+      <h1>{{ i.name }}</h1>
+      <h1>{{ i.fee }}</h1>
+      <br />
+    {% endfor %}
+
+    <h1>This <em>should be</em> fun!</h1>
+
+    <h2>{{ ' '|default:'This is a default value' }}</h2>
+    <p>{{ unsafe_html|escape }}</p>
+
+    <h2>{{ lst|join:' - ' }}</h2>
+    <h2>{{ birthday|date:'D / d / M / Y' }}</h2>
+
+    <h3>{{ '<b>I</b> <button>love</button> <span>dogs</span> | striptags' }}</h3>
+  </body>
+</html>

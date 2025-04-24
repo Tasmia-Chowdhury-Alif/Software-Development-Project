@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Django Template Filters Practicing</h1>
+
+    
+    <!-- add filter -->
+    <h2>add filter = {{ val_num | add:"5" }}</h2>
+
+    <!-- addslashes -->
+    <h2>addslashes filter = {{ val_str | addslashes }}</h2>
+
+    <!-- capfirst -->
+    <h2>capfirst filter = {{ val_str | capfirst }}</h2>
+    
+    <!-- center -->
+    <h2>capfirst filter = "{{ val_strw | center:"15" }}"</h2>
+    
+    <!-- cut -->
+    <h2>cut filter = "{{ val_str | cut:" " }}"</h2>
+    
+    <!-- date -->
+    <h2>date filter = {{ birthday | date:"D d M Y" }}</h2>
+    
+    <!-- default -->
+    <h2>default filter = {{ value | default:"the default is nothing" }}</h2>
+    
+    <h2>dictsort filter = {{ dict | dictsort:"age" }}</h2>
+    
+    <h2>divisibleby filter = {{ num | divisibleby:"3" }}</h2>
+    
+    <h2>without escape filter = {{ html_tag }}</h2>
+    <h2>escape filter = {{ "<p>hello <span>World</span> this is <b>Alif</b></p>" | escape }}</h2>
+    
+    <h2>filesizeformat filter = {{file_size}} to {{ file_size | filesizeformat }}</h2>
+    
+    <h2>first filter = {{ lst | first }}</h2>
+    
+    <h2>join filter = {{ lst | join:" // " }}</h2>
+    
+    <h2>last filter = {{ lst | last }}</h2>
+    
+    <h2>length filter = {{ lst | length }}</h2>
+    
+    <h2>linenumbers filter = {{ lst | linenumbers }}</h2>
+    
+    {% filter linenumbers %}
+        <p>apple</p>
+        <p>ball</p>
+        <p>cat</p>
+        <p>dall</p>
+    {% endfilter %}
+    
+    <h2>lower filter = {{ val_str | lower }}</h2>
+    
+    <h2>make_list filter = {{ val_str | make_list }}</h2>
+    
+    <h2>random filter = {{ val_str | random }}</h2>
+    
+    <h2>slice filter = {{ val_str | slice:"10" }}</h2>
+    
+    <h2>slugify filter = {{ val_str | slugify }}</h2>
+    
+    <h2>time filter = {{ birthday | time:"H:i" }}</h2>
+    
+    <h2>timesince filter = {{ birthday|timesince }}</h2>
+    
+    <h2>title filter = {{ val_str | title }}</h2>
+
+    <h2>unordered_list filter = {{ lst2 | unordered_list }}</h2>
+
+    <h2>upper filter = {{ val_str | upper }}</h2>
+    
+    <h2>wordcount filter = {{ val_str | wordcount }}</h2>
+    
+    
+    
+</body>
+</html>
