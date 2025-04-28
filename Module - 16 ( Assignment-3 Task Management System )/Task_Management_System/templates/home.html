@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="text-center m-5">This is Home Page</h1>
+{% comment %} <h1 class="text-center m-2">This is Home Page</h1> {% endcomment %}
 
 <div class="">
     <div class="text-center row d-flex justify-content-center mx-auto" style="width: 85%;">
@@ -9,15 +9,19 @@
         <div class="col-4 d-flex justify-content-center py-5">
             <div class="card text-center" style="width: 26rem; ">
                 <div class="card-body">
-                    <h2 class="card-title">{{task.title}}</h2>
+                    <h2 class="card-title my-4">{{task.title}}</h2>
                     <p class="card-text">{{task.description}}</p>
                     <p>Category : 
                         {% for cat in task.categories.all %}
                             <button class="btn btn-info btn-sm m-2">{{ cat.category_name }}</button>
                         {% endfor %}
                     </p>
-                    <a href="{% url 'EditTask' task.id %}" class="btn btn-primary m-3">Edit</a>
-                    <a href="{% url 'DeleteTask' task.id %}" class="btn btn-danger m-3">delete</a>
+                    {% if task.is_completed %}
+                    <p class="fs-4 fw-bold text-success m-4"><i class="fa-solid fa-circle-check" style="color:rgb(0, 199, 139);"></i> Completed</p>
+                    {% else %}
+                        <a href="{% url 'EditTaskPage' task.id %}" class="btn btn-warning m-3">Edit</a>
+                        <a href="{% url 'DeleteTaskPage' task.id %}" class="btn btn-danger m-3">delete</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

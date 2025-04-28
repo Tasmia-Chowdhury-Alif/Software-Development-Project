@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . import forms 
+from . import models, forms 
 
 # Create your views here.
 def add_task(request):
@@ -12,11 +12,23 @@ def add_task(request):
         task_form = forms.TaskForm()
     return render(request, 'add_task.html', context={'form' : task_form})
 
-def edit_task(request):
-    pass
+def edit_task(request, id):
+    task_object = models.Task.objects.get(pk= id) # selecting the specific object of task
+    task_form = forms.TaskForm(instance= task_object) # using task_object as TaskForm instance
 
-def delete_task(request):
-    pass
+    if request.method == "POST":
+        task_form = forms.TaskForm(request.POST, instance= task_object)
+        if task_form.is_valid():
+            task_form.save()
+            return redirect('HomePage')
+        
+    return render(request, 'add_task.html', context={ 'form' : task_form})
+    
+
+def delete_task(request, id):
+    task_object = models.Task.objects.get(pk= id)
+    task_object.delete()
+    return redirect('HomePage')
 
 def add_category(request):
     if request.method == 'POST':
@@ -27,9 +39,3 @@ def add_category(request):
     else:
         category_form = forms.CategoryForm()
     return render(request, 'add_category.html', context={'form' : category_form})
-
-def edit_category(request):
-    pass
-
-def delete_category(request):
-    pass
