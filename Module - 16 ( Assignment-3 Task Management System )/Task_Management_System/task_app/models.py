@@ -1,11 +1,7 @@
 from django.db import models
+from category_app.models import Category
 
 # Create your models here.
-class Category(models.Model):
-    category_name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.category_name
 
 class Task(models.Model):
     title = models.CharField(max_length=200)    

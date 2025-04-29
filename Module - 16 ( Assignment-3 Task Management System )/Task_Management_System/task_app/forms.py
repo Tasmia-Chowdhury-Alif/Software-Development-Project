@@ -8,8 +8,3 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'task_assign_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
-
-class CategoryForm(forms.ModelForm):
-    class Meta:
-        model = models.Category
-        fields = '__all__'

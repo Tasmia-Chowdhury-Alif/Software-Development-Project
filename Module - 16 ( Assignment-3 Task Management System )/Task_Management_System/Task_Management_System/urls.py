@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name= 'HomePage'),
     path('task_app/', include('task_app.urls')),
+    path('category_app/', include('category_app.urls')),
 ]
