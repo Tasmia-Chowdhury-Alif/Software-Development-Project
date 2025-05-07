@@ -1,5 +1,9 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <h1>This is meal page</h1>
+    {% for food in foods %}
+        <img src="{{food.image.url}}" alt="">
+        <h1>{{ food.food_name }}</h1>
+        <p>{{ food.food_description }}</p>
+    {% endfor %}
 {% endblock content %}
