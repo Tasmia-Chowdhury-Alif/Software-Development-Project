@@ -23,24 +23,8 @@
 
     <main>
 
-    {% block content %}
-
-        <h1>Hello World</h1>
-        <div class="w-50 mx-auto">
-            <form method="post" novalidate>
-                {% load crispy_forms_tags %}
-                {% csrf_token %}
-                <!-- {{form | crispy}} -->
-                {% for fm in form %}
-                    {{fm.label_tag}}
-                    {{fm}}
-                    {{ fm.errors|striptags }}
-                {% endfor %}
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </form>
-        </div>
-
-    {% endblock content %}
+        {% block content %}
+        {% endblock content %}
 
     </main>
 
