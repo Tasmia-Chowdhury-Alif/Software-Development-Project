@@ -6,8 +6,8 @@
         <small {% if m.tags %} class="text-{{m.tags}}" {% endif %}>{{m}}</small>
         {% endfor %}
     {% endif %}
-    <h1>Hello World</h1>
     <div class="w-50 mx-auto">
+        <h1>Sign Up Page</h1>
         <form method="post" novalidate>
             {% load crispy_forms_tags %}
             {% csrf_token %}
