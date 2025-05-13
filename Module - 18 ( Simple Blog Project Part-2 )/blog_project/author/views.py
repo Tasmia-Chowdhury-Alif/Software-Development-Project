@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from . import forms 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
 # def add_author(request):
@@ -21,3 +23,7 @@ def register(request):
     else:
         register_form = forms.RegistrationForm()
     return render(request, 'author/register.html', context={'form' : register_form})
+
+def user_login(request):
+    form = UserCreationForm()
+    pass
