@@ -32,17 +32,20 @@
                         <li class="nav-item">
                             <a class="nav-link active fs-5" aria-current="page" href="{% url 'HomePage' %}">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-5" href="{% url 'AddCategory' %}">Add Categorie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-5" href="{% url 'AddPost' %}">Add Post</a>
-                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item"> 
+                                <a class="nav-link fs-5" href="{% url 'AddPost' %}">Add Post</a>
+                            </li>
+                        {% endif %}
                     </ul>
                     <div class="">
-                        <a class="btn btn-warning me-3" href="{% url 'RegisterPage' %}">Register</a>
-                        <a class="btn btn-primary " href="{% url 'RegisterPage' %}">LogIn</a>
-                        </ul>
+                        {% if request.user.is_authenticated %}
+                            <a class="btn btn-warning " href="{% url 'ProfilePage' %}">Profile</a>
+                        {% else %}
+                            <a class="btn btn-warning me-3" href="{% url 'RegisterPage' %}">Register</a>
+                            <a class="btn btn-primary " href="{% url 'LoginPage' %}">LogIn</a>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
@@ -50,6 +53,9 @@
     </header>
 
     <main>
+        {% for m in messages %}
+            <div class="text-center w-50 mx-auto text-white bg-{{m.tags}} p-3 mt-2 rounded fs-5">{{m}}</div>
+        {% endfor %}
 
         {% block content %}
 
