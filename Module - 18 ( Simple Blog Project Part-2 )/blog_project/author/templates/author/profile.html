@@ -3,12 +3,29 @@
 
 {% block content %}
 
-<form class="w-50 m-auto" method="post" >
-        <h1>Profile Page</h1>
-        <a class="btn btn-sm btn-warning" href="{% url 'PassChangePage' %}">Change Password</a>
-        {% csrf_token %}
+    <a class="btn btn-primary" href="{% url 'EditProfilePage' %}">Edit Your Profile</a>
 
-        {{ form | crispy }}
-        <button class="btn btn-warning mt-3" type="submit">Submit</button>
-    </form>
+    <div class="my-5"> 
+        {% for post in data %}
+            <div class="card w-50 mx-auto p-3">
+                <div class="card-body">
+                    <h4 class="card-title">{{ post.title }}</h4>
+                    <p class="card-text">{{ post.content }}</p>
+                    <p><i>Author : {{ post.author.first_name }} {{ post.author.last_name }}</i></p>
+                    <p>Category : 
+                        {% for cat in post.category.all %}
+                            <button class="btn btn-primary btn-sm m-2">{{ cat.name }}</button>
+                        {% endfor %}
+                    </p>
+                    <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
+                    
+                    <a class="btn btn-warning" href="{% url 'EditPost' post.id %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'DeletePost' post.id %}">Delete</a>
+                </div>
+                <!-- provide a image field in the Posts and update the database -->
+                <!-- <img src="..." class="card-img-bottom" alt="..."> --> 
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock content %}

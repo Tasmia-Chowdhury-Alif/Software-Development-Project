@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from . import forms 
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash   
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from posts.models import Post
 
 # Create your views here.
 # def add_author(request):
@@ -47,14 +48,20 @@ def user_login(request):
 
 @login_required
 def profile(request):
+    data = Post.objects.filter(author = request.user)   # for every post filter() checks if 'author' is equal to 'request.user' and shows only the filterd post
+    # data = Post.objects.all() 
+    return render(request, 'author/profile.html', context={'data' : data})
+
+@login_required
+def edit_profile(request):
     form = forms.ChangeUserData(instance= request.user)
     if request.method == 'POST':
         form = forms.ChangeUserData(request.POST, instance= request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated Succefully")
-            return redirect('ProfilePage')
-    return render(request, 'author/profile.html', context={'form' : form})
+            return redirect('EditProfilePage')
+    return render(request, 'author/edit_profile.html', context={'form' : form})
 
 @login_required
 def pass_change(request):
@@ -63,6 +70,11 @@ def pass_change(request):
         form = PasswordChangeForm(user= request.user, data= request.POST)
         if form.is_valid():
             form.save()
+            update_session_auth_hash(request, request.user) # this will create a new session id without logging out the user. this improves user experience
             messages.success(request, "Password Changed Successfully")
             return redirect('ProfilePage')
     return render(request, 'author/pass_change.html', context={'form' : form})
+
+def user_logout(request):
+    logout(request)
+    return redirect('LoginPage')
