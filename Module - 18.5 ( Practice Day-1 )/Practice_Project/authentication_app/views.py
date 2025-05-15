@@ -6,6 +6,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def home(request):
+    return render(request, 'home.html')
+
 def user_signup(request):
     form = forms.SignupForm()
     if request.method == 'POST':
@@ -37,7 +40,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully")
-    return redirect('SignupPage')
+    return redirect('HomePage')
 
 @login_required
 def profile(request):
