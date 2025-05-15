@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name= 'HomePage'),
+    path('category/<slug:category_slug>/', views.home, name= 'CategoryWisePostPage'),
     path('author/', include('author.urls')),
     path('categories/', include('categories.urls')),
     path('posts/', include('posts.urls')),

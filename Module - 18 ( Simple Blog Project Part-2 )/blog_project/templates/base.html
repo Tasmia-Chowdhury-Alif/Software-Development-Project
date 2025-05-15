@@ -16,10 +16,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body>
+<body style="background-color: #e4e4e4;">
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(9, 91, 60);">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" > 
+            <!-- style="background-color:rgb(9, 91, 60);" -->
             <div class="container-fluid mx-auto" style="width: 75%;">
                 <a class="navbar-brand fs-2 p-2" href="">Django Blog</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -30,7 +31,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active fs-5" aria-current="page" href="{% url 'HomePage' %}">Home</a>
+                            <a class="nav-link fs-5" aria-current="page" href="{% url 'HomePage' %}">Home</a>
                         </li>
                         {% if request.user.is_authenticated %}
                             <li class="nav-item"> 
@@ -54,14 +55,15 @@
         </nav>
     </header>
 
-    <main>
+    <main >
         {% for m in messages %}
             <div class="text-center w-50 mx-auto text-white bg-{{m.tags}} p-3 mt-2 rounded fs-5">{{m}}</div>
         {% endfor %}
 
         {% block content %}
-
+        
         {% endblock content %}
+        </div>
 
     </main>
 

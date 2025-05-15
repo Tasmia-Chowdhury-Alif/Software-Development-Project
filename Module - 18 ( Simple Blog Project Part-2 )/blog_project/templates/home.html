@@ -1,24 +1,52 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <div class="my-5"> 
-        {% for post in data %}
-            <div class="card w-50 mx-auto p-3">
-                <div class="card-body">
-                    <h4 class="card-title">{{ post.title }}</h4>
-                    <p class="card-text">{{ post.content }}</p>
-                    <p><i>Author : {{ post.author.first_name }} {{ post.author.last_name }}</i></p>
-                    <p>Category : 
-                        {% for cat in post.category.all %}
-                            <button class="btn btn-primary btn-sm m-2">{{ cat.name }}</button>
-                        {% endfor %}
-                    </p>
-                    <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="d-flex justify-content-between align-items-center flex-wrap mx-5 pt-3">
+        <div class="col-6 " style="padding: 1px 100px;">
+            <h1>Wellcome to Django Blog</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, voluptatum nesciunt odit dicta facere ducimus rem molestias amet, reprehenderit facilis eaque repellendus deleniti corporis modi earum tempore iste neque! Dignissimos veritatis laudantium voluptates laboriosam maiores tempora assumenda mollitia perspiciatis corrupti sapiente eos vitae soluta, itaque sit numquam beatae nihil commodi expedita iure. Quisquam eligendi ullam mollitia soluta recusandae quod placeat at odio autem consequuntur doloribus quibusdam corrupti veniam delectus vero molestias, nulla facilis vitae dolor sapiente dicta! Asperiores impedit ipsum suscipit dolores tempore nemo repellendus hic, sit cumque omnis dicta, illum laborum sint numquam necessitatibus dolor ut recusandae quaerat rerum.</p>
+        </div>
+        <div class="col-6">
+            <img style="width: 100%; height: auto;" src="{% static 'blog-cover.png' %}" />
+        </div>
+        
+    </div>
+
+    <div class="d-flex flex-wrap ms-5 ps-4 py-4 ">
+        <div class="bg-white rounded col-2 p-4" style="margin-top: 88px; height: 80vh;">
+            <h4 >All Categories</h4>
+            {% for cat in category %}
+                {% comment %} <a href="{% url 'CategoryWisePostPage' cat.slug %}"> {% endcomment %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="category" id="flexRadioDefault{{cat.id}}" onclick="location.href='{% url 'CategoryWisePostPage' cat.slug %}';" >
+                    <label class="form-check-label" for="flexRadioDefault{{cat.id}}">
+                            {{cat.name}}
+                        </label>
+                    </div>
+                {% comment %} </a> {% endcomment %}
+            {% endfor %}
+        </div>
+        <div class="all-posts my-2 col-10"> 
+            <h2 class="text-center rounded bg-info mx-5 p-3">{{ data | length }} Results found</h2>
+            {% for post in data %}
+                <div class="card w-50 mx-auto my-3 p-3">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ post.title }}</h4>
+                        <p class="card-text">{{ post.content }}</p>
+                        <p><i>Author : {{ post.author.first_name }} {{ post.author.last_name }}</i></p>
+                        <p>Category : 
+                            {% for cat in post.category.all %}
+                                <button class="btn btn-primary btn-sm m-2">{{ cat.name }}</button>
+                            {% endfor %}
+                        </p>
+                        <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                    <!-- provide a image field in the Posts and update the database -->
+                    <!-- <img src="..." class="card-img-bottom" alt="..."> --> 
                 </div>
-                <!-- provide a image field in the Posts and update the database -->
-                <!-- <img src="..." class="card-img-bottom" alt="..."> --> 
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock content %}

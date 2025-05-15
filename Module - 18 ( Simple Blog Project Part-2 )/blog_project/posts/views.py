@@ -11,7 +11,7 @@ def add_post(request):
         if post_form.is_valid(): # Checking that the request.POST data does not contain any error or invalid something
             post_form.instance.author = request.user  # seting the logged in user as the author of the post
             post_form.save() # saving the input data to the database
-            return redirect('AddPost') # after successfully saving the data, redirecting to the AddPost page again
+            return redirect('HomePage') # after successfully saving the data, redirecting to the AddPost page again
     else:
         post_form = forms.PostForm() # in veiws.py model forms needs to be called with ()
     

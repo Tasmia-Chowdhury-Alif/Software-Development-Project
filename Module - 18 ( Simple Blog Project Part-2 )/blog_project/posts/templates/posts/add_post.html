@@ -4,7 +4,7 @@
 {% block content %}
 
 <form class="w-50 m-auto" method="post" >
-        <h1>Add Post page</h1>
+        <h1 class="text-center">Add Post page</h1>
         {% csrf_token %}
 
         {{ form | crispy }}
