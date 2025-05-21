@@ -12,35 +12,47 @@
         </div>
         
     </div>
-
-    <div class="d-flex flex-wrap ms-5 ps-4 py-4 ">
-        <div class="bg-white rounded col-2 p-4" style="margin-top: 88px; height: 80vh;">
-            <h4 >All Categories</h4>
+    
+    
+    <div class="d-flex flex-wrap py-4 d-flex justify-content-center">
+        <div class="bg-white rounded p-4 text-center" style="margin-top: 100px; width: 80%;">
+            <h4 class="pb-4">All Categories</h4>
             {% for cat in category %}
                 {% comment %} <a href="{% url 'CategoryWisePostPage' cat.slug %}"> {% endcomment %}
-                <div class="form-check">
+                <div class="d-inline mx-3">
                     <input class="form-check-input" type="radio" name="category" id="flexRadioDefault{{cat.id}}" onclick="location.href='{% url 'CategoryWisePostPage' cat.slug %}';" >
-                    <label class="form-check-label" for="flexRadioDefault{{cat.id}}">
-                            {{cat.name}}
-                        </label>
-                    </div>
+                    <label class="form-check-label ps-2" for="flexRadioDefault{{cat.id}}">
+                        {{cat.name}}
+                    </label>
+                </div>
                 {% comment %} </a> {% endcomment %}
-            {% endfor %}
+                {% endfor %}
+            </div>
+            
+        <div class="text-center text-success p-3 mx-auto " style="width: 95%; margin-top: 40px; margin-bottom: 40px;">
+            <h1 >Results found : {{ data | length }}</h1>
         </div>
-        <div class="all-posts my-2 col-10"> 
-            <h2 class="text-center rounded bg-info mx-5 p-3">{{ data | length }} Results found</h2>
+        
+        <div class="all-posts my-2 row d-flex justify-content-evenly" style="width: 80%;"> 
             {% for post in data %}
-                <div class="card w-50 mx-auto my-3 p-3">
-                    <div class="card-body">
-                        <h4 class="card-title">{{ post.title }}</h4>
-                        <p class="card-text">{{ post.content }}</p>
-                        <p><i>Author : {{ post.author.first_name }} {{ post.author.last_name }}</i></p>
-                        <p>Category : 
-                            {% for cat in post.category.all %}
+                <div class="col-sm-6 " style="width: 40%;">
+                    <div class="card my-3 p-3" >
+                        <div class="card-body">
+                            {% if post.image %}
+                            <div class="text-center">
+                                <img src="{{ post.image.url }}" class="card-img-top mx-auto" alt="" style="width: 80%; height: auto;">
+                            </div>
+                            {% endif %}
+                            <h4 class="card-title mt-4">{{ post.title }}</h4>
+                            <p class="card-text">{{ post.content }}</p>
+                            <p><i>Author : {{ post.author.first_name }} {{ post.author.last_name }}</i></p>
+                            <p>Category : 
+                                {% for cat in post.category.all %}
                                 <button class="btn btn-primary btn-sm m-2">{{ cat.name }}</button>
-                            {% endfor %}
-                        </p>
-                        <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
+                                {% endfor %}
+                            </p>
+                            <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
                     </div>
                     <!-- provide a image field in the Posts and update the database -->
                     <!-- <img src="..." class="card-img-bottom" alt="..."> --> 
