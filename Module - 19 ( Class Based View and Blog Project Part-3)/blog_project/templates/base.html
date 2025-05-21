@@ -42,7 +42,10 @@
                     <div class="">
                         {% if request.user.is_authenticated %}
                             <a class="btn btn-warning me-3" href="{% url 'ProfilePage' %}">Profile</a>
-                            <a class="btn btn-danger " href="{% url 'LogoutPage' %}">LogOut</a>
+                            <form class="d-inline" method="post" action="{% url 'LogoutPage' %}">
+                                {% csrf_token %}
+                                <button class="btn btn-danger me-3" type="submit">Logout</button>
+                            </form>
 
                         {% else %}
                             <a class="btn btn-warning me-3" href="{% url 'RegisterPage' %}">Register</a>

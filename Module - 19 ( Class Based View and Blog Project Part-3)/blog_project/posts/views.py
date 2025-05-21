@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from . import forms, models
+from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, DeleteView
 
@@ -20,6 +21,7 @@ def add_post(request):
     return render(request, 'posts/add_post.html', context={'form' : post_form}) # according to best practice django app's templates must contain a folder named as same as the app name. so the template path is posts/add_post.html
 
 # add post using class based view
+@method_decorator(login_required, name='dispatch')
 class AddPostView(CreateView):
     model = models.Post
     form_class = forms.PostForm 
@@ -47,6 +49,7 @@ def edit_post(request, id):
     return render(request, 'posts/add_post.html', context={'form' : post_form}) # according to best practice django app's templates must contain a folder named as same as the app name. so the template path is posts/add_post.html
 
 
+@method_decorator(login_required, name='dispatch')
 class EditPostView(UpdateView):
     model = models.Post
     form_class = forms.PostForm
@@ -62,6 +65,7 @@ def delete_post(request, id):
     return redirect('HomePage')
 
 
+@method_decorator(login_required, name='dispatch')
 class DeletePostView(DeleteView):
     model = models.Post
     template_name = 'Author/delete.html'

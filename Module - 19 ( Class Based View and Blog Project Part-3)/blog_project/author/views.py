@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from . import forms 
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash   
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from posts.models import Post
+from django.contrib.auth.views import LoginView, LogoutView
 
 # Create your views here.
 # def add_author(request):
@@ -46,6 +48,25 @@ def user_login(request):
                 messages.warning(request, "Invalid Login Information !")
     return render(request, 'author/register.html', context={'form' : form, 'type' : 'Login'})
 
+class UserLoginView(LoginView):
+    template_name = 'author/register.html'
+    # success_url = reverse_lazy('ProfilePage')
+    def get_success_url(self): 
+        return reverse_lazy('ProfilePage')
+
+    def form_valid(self, form):
+        messages.success(self.request, "Logged in Successfully")
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.warning(self.request, "Invalid Username or Password")
+        return super().form_invalid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['type'] = 'Login'
+        return context
+
 @login_required
 def profile(request):
     data = Post.objects.filter(author = request.user)   # for every post filter() checks if 'author' is equal to 'request.user' and shows only the filterd post
@@ -78,3 +99,6 @@ def pass_change(request):
 def user_logout(request):
     logout(request)
     return redirect('LoginPage')
+
+class UserLogoutView(LogoutView):
+    next_page = reverse_lazy('LoginPage')
