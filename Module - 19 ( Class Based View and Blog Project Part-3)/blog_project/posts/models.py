@@ -9,7 +9,7 @@ class Post(models.Model):
     category = models.ManyToManyField(Category) # Many to Many relationship because = one post can have multiple category and also one category can contain multiple posts
     author = models.ForeignKey(User, on_delete=models.CASCADE) # Many to one relationship because = Multiple posts can have same author and also one author can have multiple posts
     # author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    image = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    image = models.ImageField(upload_to='posts/media/uploads/', null=True, blank=True) # to save the uploaded image specifically to the app's inner media directory you need to comment out the MEDIA_ROOT = BASE_DIR / 'media' at settings.py
     
     def __str__(self):
         return self.title

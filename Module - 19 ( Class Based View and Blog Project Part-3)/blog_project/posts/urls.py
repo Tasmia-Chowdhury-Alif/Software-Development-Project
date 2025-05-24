@@ -8,4 +8,5 @@ urlpatterns = [
     path('edit/<int:id>', views.EditPostView.as_view(), name= 'EditPost'),
     # path('delete/<int:id>', views.delete_post, name= 'DeletePost'),
     path('delete/<int:id>', views.DeletePostView.as_view(), name= 'DeletePost'),
+    path('detail/<int:pk>', views.DetailPostView.as_view(), name= 'DetailPost'),
 ]
