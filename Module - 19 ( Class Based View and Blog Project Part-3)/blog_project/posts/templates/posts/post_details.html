@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -15,12 +16,55 @@
                 <p><i>Author : {{ post.author.first_name }} {{ post.author.last_name }}</i></p>
                 <p>Category :
                     {% for cat in post.category.all %}
-                    <button class="btn btn-primary btn-sm m-2">{{ cat.name }}</button>
+                    <button class="btn btn-warning btn-sm m-2">{{ cat.name }}</button>
                     {% endfor %}
                 </p>
                 <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
     </div>
+
+    <div class="card mx-3 p-3">
+        <div class="card-body">
+            <h5>Total comment's : {{ comments | length }}</h5>
+            
+            
+            {% for comment in comments %}
+            <div class="card p-3 mb-3 mx-auto" style="width: 50%;">
+                <div class="card-body">
+                    <div class="d-flex mb-3">
+                        {% comment %} <img src="" class="rounded-circle me-3" alt="User Avatar"> {% endcomment %}
+                        <div class="d-flex align-items-center w-100">
+                            <h5 class="card-title mb-0">{{ comment.name }}</h5>
+                            <small class="text-muted ms-auto" style="">Commented on {{ comment.created_on }}</small>
+                        </div>
+                    </div>
+                    <p class="card-text">{{ comment.body }}</p>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-sm btn-outline-primary me-2">
+                            <i class="bi bi-hand-thumbs-up"></i> Like
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-reply"></i> Reply
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="bg-white m-3 p-5 rounded">
+        <form class="w-50 m-auto" method="post" >
+            <h1 class="text-center">Comments</h1>
+            {% csrf_token %}
+
+            {{ comment_form | crispy }}
+            <button class="btn btn-info " style="color: navy ;" type="submit">Comment</button>
+        </form>
+    </div>
+
+    
 
 {% endblock content %}
