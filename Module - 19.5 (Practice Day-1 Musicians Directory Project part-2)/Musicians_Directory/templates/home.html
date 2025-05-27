@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center my-5">This Home Page</h1>
+    <table class="table table-bordered w-75 mx-auto">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Musician Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Album Rating</th>
+                <th scope="col">Instrument Type</th>
+                <th scope="col">Album Name</th>
+                <th scope="col">Release Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for musician in musicians %}
+                {% for album in musician.albums.all %}
+                    <tr>
+                        <th scope="row">{{ musician.id }}</th>
+                        <td><a class="btn" href="{% url 'EditMusician' musician.id %}">{{ musician.first_name }} {{ musician.last_name }}</a></td>
+                        <td>{{ musician.email }}</td>
+                        <td>{{ album.get_rating_display }}</td>
+                        <td>{{ musician.get_instrument_type_display }}</td>
+                        <td>{{ album.album_name }}</td>
+                        <td>{{ album.album_release_date }}</td>
+                        <td>
+                          <a class="btn btn-info" href="{% url 'EditAlbum' album.id  %}">Edit</a>
+                          <a class="btn btn-danger" href="{% url 'DeleteMusician' musician.id %}">Delete</a>
+                        </td>
+                    </tr>
+
+                    {% empty %}
+                        <tr>
+                            <th scope="row">{{ musician.id }}</th>
+                            <td><a class="btn" href="{% url 'EditMusician' musician.id %}">{{ musician.first_name }} {{ musician.last_name }}</a></td>
+                            <td>{{ musician.email }}</td>
+                            <td> N/A </td>
+                            <td>{{ musician.get_instrument_type_display }}</td>
+                            <td> N/A </td>
+                            <td> N/A </td>
+                            <td>
+                                {% comment %} <a class="btn btn-info" href="{% url 'EditAlbum'  %}">Edit</a> {% endcomment %}
+                                <a class="btn btn-danger" href="{% url 'DeleteMusician' musician.id %}">Delete</a>
+                            </td>
+                        </tr>
+                {% endfor %}
+
+            {% endfor %}
+        </tbody>
+      </table>
+{% endblock content %}
