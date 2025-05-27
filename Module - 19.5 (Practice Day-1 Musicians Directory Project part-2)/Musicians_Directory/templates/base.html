@@ -44,6 +44,11 @@
     </header>
 
     <body>
+        {% if messages %}
+        {% for m in messages %}
+            <div class="text-center w-50 mx-auto text-white bg-{{m.tags}} p-3 mt-2 rounded fs-5">{{m}}</div>
+        {% endfor %}
+        {% endif %}
 
         {% block content %}
         {% endblock content %}

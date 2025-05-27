@@ -3,7 +3,7 @@
 
 {% block content %}
 <form class="w-50 h-auto mx-auto" method="post" >
-        <h1 class="text-center my-5">User Signup Page</h1>
+        <h1 class="text-center my-5">{{ type }}</h1>
         {% csrf_token %}
         {{ form | crispy }}
         <button class="btn btn-primary" type="submit">Submit</button>

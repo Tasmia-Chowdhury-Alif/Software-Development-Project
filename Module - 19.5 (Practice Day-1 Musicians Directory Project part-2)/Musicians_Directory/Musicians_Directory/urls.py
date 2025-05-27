@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.home, name= 'HomePage'),
     path('album/', include('album.urls')),
     path('musician/', include('musician.urls')),
+    path('user_app/', include('user_app.urls')),
 ]
