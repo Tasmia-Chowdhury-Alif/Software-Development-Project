@@ -12,7 +12,7 @@ class Album(models.Model):
     )
 
     album_name = models.CharField(max_length=200)
-    musician = models.ForeignKey(Musician, on_delete=models.CASCADE, related_name='albums')
+    musician = models.ForeignKey(Musician, on_delete=models.CASCADE, related_name='albums') # here Album model will play the one and Musician Model will play the Meny Relationship role 
     album_release_date = models.DateField(auto_now_add=True)
     rating = models.CharField(max_length=20, choices=RATTING_CHOICES, default='1')
 

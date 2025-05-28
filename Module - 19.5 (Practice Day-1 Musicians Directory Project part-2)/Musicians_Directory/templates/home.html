@@ -12,7 +12,9 @@
                 <th scope="col">Instrument Type</th>
                 <th scope="col">Album Name</th>
                 <th scope="col">Release Date</th>
-                <th scope="col">Actions</th>
+                {% if request.user.is_authenticated %}
+                    <th scope="col">Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -20,31 +22,36 @@
                 {% for album in musician.albums.all %}
                     <tr>
                         <th scope="row">{{ musician.id }}</th>
-                        <td><a class="btn" href="{% url 'EditMusician' musician.id %}">{{ musician.first_name }} {{ musician.last_name }}</a></td>
+                        <td><a class="btn" href="{% url 'EditMusicianPage' musician.id %}">{{ musician.first_name }} {{ musician.last_name }}</a></td>
                         <td>{{ musician.email }}</td>
                         <td>{{ album.get_rating_display }}</td>
                         <td>{{ musician.get_instrument_type_display }}</td>
                         <td>{{ album.album_name }}</td>
                         <td>{{ album.album_release_date }}</td>
-                        <td>
-                          <a class="btn btn-info" href="{% url 'EditAlbum' album.id  %}">Edit</a>
-                          <a class="btn btn-danger" href="{% url 'DeleteMusician' musician.id %}">Delete</a>
-                        </td>
+                        {% if request.user.is_authenticated %}
+                            <td>
+                                <a class="btn btn-info" href="{% url 'EditAlbumPage' album.id  %}">Edit</a>
+                                <a class="btn btn-danger" href="{% url 'DeleteMusicianPage' musician.id %}">Delete</a>
+                            </td>
+                        {% endif %}
                     </tr>
-
+                    
+                    {% comment %} if the albums iterable is empty but the Musician is not, then the empty block will exicute to show the empty Musician  {% endcomment %}
                     {% empty %}
                         <tr>
                             <th scope="row">{{ musician.id }}</th>
-                            <td><a class="btn" href="{% url 'EditMusician' musician.id %}">{{ musician.first_name }} {{ musician.last_name }}</a></td>
+                            <td><a class="btn" href="{% url 'EditMusicianPage' musician.id %}">{{ musician.first_name }} {{ musician.last_name }}</a></td>
                             <td>{{ musician.email }}</td>
                             <td> N/A </td>
                             <td>{{ musician.get_instrument_type_display }}</td>
                             <td> N/A </td>
                             <td> N/A </td>
-                            <td>
-                                {% comment %} <a class="btn btn-info" href="{% url 'EditAlbum'  %}">Edit</a> {% endcomment %}
-                                <a class="btn btn-danger" href="{% url 'DeleteMusician' musician.id %}">Delete</a>
-                            </td>
+                            {% if request.user.is_authenticated %}
+                                <td>
+                                    {% comment %} <a class="btn btn-info" href="{% url 'EditAlbumPage'  %}">Edit</a> {% endcomment %}
+                                    <a class="btn btn-danger" href="{% url 'DeleteMusicianPage' musician.id %}">Delete</a>
+                                </td>
+                            {% endif %}
                         </tr>
                 {% endfor %}
 

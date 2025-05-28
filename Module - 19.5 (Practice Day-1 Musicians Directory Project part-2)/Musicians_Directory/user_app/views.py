@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import CreateView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from . import forms 
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
@@ -38,3 +38,10 @@ class UserLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('HomePage')
     
+class UserLogoutView(LogoutView):
+    next_page = reverse_lazy('HomePage')
+    
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        messages.success(self.request, 'You have been logged out successfully.')
+        return response
