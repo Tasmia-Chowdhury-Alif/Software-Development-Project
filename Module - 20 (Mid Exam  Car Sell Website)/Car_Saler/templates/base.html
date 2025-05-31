@@ -35,7 +35,7 @@
                     </ul>
                     <div class="">
                         {% if request.user.is_authenticated %}
-                            {% comment %} <a class="btn btn-warning me-3" href="{% url 'ProfilePage' %}">Profile</a> {% endcomment %}
+                            <a class="btn btn-warning me-3" href="{% url 'ProfilePage' %}">Profile</a>
                             <form class="d-inline" method="post" action="{% url 'LogoutPage' %}">
                                 {% csrf_token %}
                                 <button class="btn btn-danger me-3" type="submit">Logout</button>
