@@ -1,59 +1,109 @@
 {% extends "base.html" %}
-{% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
+
+    <div class="card mb-3" style="">
+        <div class="row g-0">
+            
+            {% if car.images %}
+
+            <div id="carousel{{ car.id }}" class="carousel slide col-md-6" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    {% for img in car.images.all %}
+                    <button type="button" data-bs-target="#carousel{{ car.id }}" data-bs-slide-to="{{ forloop.counter0 }}" 
+                    {% if forloop.first %} class="active" aria-current="true" {% endif %}
+                    aria-label="Slide {{ forloop.counter }}">
+                    </button>
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                    {% for img in car.images.all %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %} ratio ratio-4x3">
+                        <img src="{{ img.image.url }}" class="img-fluid" alt="Car Image" style="object-fit: cover;">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ car.id }}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ car.id }}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         
-        <div class="all-posts my-2 row d-flex justify-content-evenly" style="width: 80%;"> 
-                <div class="col-sm-6 " style="width: 40%;">
-                    <div class="card my-3 p-3" >
-                        <div class="card-body">
-                            {% if car.images %}
-                        
-                            {% comment %} <div class="text-center">
-                                <img src="{{ post.image.url }}" class="card-img-top mx-auto" alt="" style="width: 80%; height: auto;">
-                            </div> {% endcomment %}
+        
+            {% endif %}
+        
+            <div class="card-body w-50 my-auto col-md-6 " >
+                <div class="mx-auto mb-1" style="width: 80%;">
 
-                            <div id="carousel{{ car.id }}" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-indicators">
-                                    {% for img in car.images.all %}
-                                        <button type="button" data-bs-target="#carousel{{ car.id }}" data-bs-slide-to="{{ forloop.counter0 }}"
-                                            {% if forloop.first %} class="active" aria-current="true" {% endif %}
-                                            aria-label="Slide {{ forloop.counter }}">
-                                        </button>
-                                    {% endfor %}
-                                </div>
-                                <div class="carousel-inner">
-                                    {% for img in car.images.all %}
-                                        <div class="carousel-item {% if forloop.first %}active{% endif %} ratio ratio-4x3">
-                                            <img src="{{ img.image.url }}" class="img-fluid" alt="Car Image" style="object-fit: cover;">
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ car.id }}" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ car.id }}" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
+                    
+                    <h1 class="card-title ">{{ car.name }}</h1>
+                    <p class="card-text"><b>Price :</b> {{ car.price }} Taka</p>
+                    <p class="card-text"><b>Quantity : </b>
+                        {% if car.quantity %}
+                            {{ car.quantity }}
+                        {% else %}
+                            <i class="text-danger"> Out Of Stock</i>
+                        {% endif %}
+                    </p>
+                    <p class="card-text"><b>Description :</b> {{ car.description }}</p>
+                    <p class="card-text"><b>Brand Name :</b> {{ car.brand.name }}</p> 
+                    
+                    {% if request.user.is_authenticated %}
+                    <form method="post" action="{% url 'BuyNowPage' car.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success ">Buy Now</button>
+                    </form>
+                    {% endif %}
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="card mx-3 p-3">
+        <div class="card-body">
+            <h5>Total comment's : {{ comments | length }}</h5>
+            
+            {% for comment in comments %}
+                <div class="card p-3 mb-3 mx-auto" style="width: 50%;">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            {% comment %} <img src="" class="rounded-circle me-3" alt="User Avatar"> {% endcomment %}
+                            <div class="d-flex align-items-center w-100">
+                                <h5 class="card-title mb-0">{{ comment.name }}</h5>
+                                <small class="text-muted ms-auto" style="">Commented on {{ comment.created_at }}</small>
                             </div>
-
-
-                            {% endif %}
-                            <h4 class="card-title mt-4">{{ car.name }}</h4>
-                            {% comment %} <p class="card-text">{{ post.content |truncatewords:40 }}</a></p>  {% endcomment %}
-                            <p>Price : {{ car.price }}</p>
-                            <p>Brand Name : {{ car.brand.name }}</p>
-                            {% comment %} <a class="btn btn-info btn-sm text-decoration-none text-black" href="{% url 'DetailsPage' car.id %}">View Details</a> {% endcomment %}
-                            <button type="button" class="btn btn-info btn-sm">View Details</button>
-                            
+                        </div>
+                        <p class="card-text">{{ comment.comment }}</p>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-outline-primary me-2">
+                                <i class="bi bi-hand-thumbs-up"></i> Like
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-reply"></i> Reply
+                            </button>
                         </div>
                     </div>
-                    <!-- provide a image field in the Posts and update the database -->
-                    <!-- <img src="..." class="card-img-bottom" alt="..."> --> 
                 </div>
+            {% endfor %}
         </div>
+    </div>
+
+
+    <div class="bg-white m-3 p-5 rounded">
+        <form class="w-50 m-auto" method="post" >
+            <h1 class="text-center">Comments</h1>
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button class="btn btn-info " style="color: navy ;" type="submit">Comment</button>
+        </form>
     </div>
 
 {% endblock content %}

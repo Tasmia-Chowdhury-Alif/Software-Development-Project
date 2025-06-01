@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block content %}
-    <div class="d-flex justify-content-between align-items-center flex-wrap mx-5 pt-3">
-        <div class="col-6 " style="padding: 1px 100px;">
+    <div class="d-flex justify-content-between align-items-center flex-wrap mx-5 ">
+        <div class="col-6 " style="padding: 0px 100px 0px 40px;">
             <h1>Wellcome to Car Seller</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, voluptatum nesciunt odit dicta facere ducimus rem molestias amet, reprehenderit facilis eaque repellendus deleniti corporis modi earum tempore iste neque! Dignissimos veritatis laudantium voluptates laboriosam maiores tempora assumenda mollitia perspiciatis corrupti sapiente eos vitae soluta, itaque sit numquam beatae nihil commodi expedita iure. Quisquam eligendi ullam mollitia soluta recusandae quod placeat at odio autem consequuntur doloribus quibusdam corrupti veniam delectus vero molestias, nulla facilis vitae dolor sapiente dicta! Asperiores impedit ipsum suscipit dolores tempore nemo repellendus hic, sit cumque omnis dicta, illum laborum sint numquam necessitatibus dolor ut recusandae quaerat rerum.</p>
         </div>
         <div class="col-6">
-            <img style="width: 100%; height: auto;" src="{% static 'blog-cover.png' %}" />
+            <img style="width: 100%; height: 840px;" src="{% static 'images/home-image.jpg' %}" />
         </div>
         
     </div>
@@ -33,7 +33,7 @@
             <h1 >Results found : {{ products | length }}</h1>
         </div>
         
-        <div class="all-posts my-2 row d-flex justify-content-evenly" style="width: 80%;"> 
+        <div class="my-2 row d-flex justify-content-evenly" style="width: 80%;"> 
             {% for car in products %}
                 <div class="col-sm-6 " style="width: 40%;">
                     <div class="card my-3 p-3" >
@@ -73,16 +73,12 @@
 
                             {% endif %}
                             <h4 class="card-title mt-4">{{ car.name }}</h4>
-                            {% comment %} <p class="card-text">{{ post.content |truncatewords:40 }}</a></p>  {% endcomment %}
-                            <p>Price : {{ car.price }}</p>
-                            <p>Brand Name : {{ car.brand.name }}</p>
+                            <p class="card-text">Price : {{ car.price }} Taka</p>
+                            <p class="card-text">Brand Name : {{ car.brand.name }}</p>
                             <a class="btn btn-info btn-sm text-decoration-none text-black" href="{% url 'DetailsPage' car.id %}">View Details</a> 
-                            <!-- <button type="button" class="btn btn-info btn-sm">View Details</button> -->
                             
                         </div>
                     </div>
-                    <!-- provide a image field in the Posts and update the database -->
-                    <!-- <img src="..." class="card-img-bottom" alt="..."> --> 
                 </div>
             {% endfor %}
         </div>

@@ -31,3 +31,13 @@ class Order(models.Model):
     owner = models.ForeignKey(User, on_delete= models.CASCADE, related_name= 'orders')
     car = models.ForeignKey(Car, on_delete= models.CASCADE)
     order_date = models.DateTimeField(auto_now_add=True)
+
+
+class Comment(models.Model):
+    car = models.ForeignKey(Car, on_delete= models.CASCADE, related_name= 'comments')
+    name = models.CharField(max_length=200)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.name} - {self.car.name}'

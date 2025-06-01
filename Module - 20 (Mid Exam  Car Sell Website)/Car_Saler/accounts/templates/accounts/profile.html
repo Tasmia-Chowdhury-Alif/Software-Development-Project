@@ -2,5 +2,56 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h1 class="text-center m-3">Wellcome {{ request.user.username }} </h1>
+<h1 class="text-center m-3">Welcome {{ request.user.username }}</h1>
+
+<div>
+    <h4 class="ms-5 p-5">Edit Your Profile :- <a class="btn btn-outline-primary" href="{% url "EditProfilePage" %}">Edit</a></h4>
+</div>
+
+<div class="row mx-auto " style="width: 70%;">
+    {% for order in orders %}
+        <div class="col-md-4 my-2">
+            <div class="card " style="height: 100%;">
+                {% if order.car.images %}
+                    <div id="carousel{{ order.car.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            {% for img in order.car.images.all %}
+                                <button type="button" data-bs-target="#carousel{{ order.car.id }}"
+                                        data-bs-slide-to="{{ forloop.counter0 }}"
+                                        {% if forloop.first %}class="active" aria-current="true"{% endif %}
+                                        aria-label="Slide {{ forloop.counter }}">
+                                </button>
+                            {% endfor %}
+                        </div>
+                        <div class="carousel-inner">
+                            {% for img in order.car.images.all %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %} ratio ratio-4x3">
+                                    <img src="{{ img.image.url }}" class="img-fluid card-img-top" alt="Car Image" style="object-fit: cover;">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ order.car.id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ order.car.id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                {% endif %}
+                
+                <div class="card-footer ">
+                    <small class="text-muted"><b>Order Date:</b> {{ order.order_date }}</small>
+                </div>
+                <div class="card-body mx-4 mb-3">
+                    <h3 class="card-title mt-4">{{ order.car.name }}</h3>
+                    <p class="card-text"><b>Price:</b> {{ order.car.price }} Taka</p>
+                    <p class="card-text"><b>Brand Name:</b> {{ order.car.brand.name }}</p>
+                    <p class="card-text"><b>Description:</b> {{ order.car.description }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock content %}

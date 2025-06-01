@@ -12,3 +12,4 @@ class CarAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(models.Brand)
 admin.site.register(models.Car, CarAdmin)
+admin.site.register(models.Comment)
