@@ -1,15 +1,15 @@
-from django.shortcuts import render
-from .forms import UserRegistrationForm
-from django.views.generic import FormView
+from django.shortcuts import render, redirect
+from .forms import UserRegistrationForm, UserUpdateForm
+from django.views.generic import FormView, View
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 
 # Create your views here.
 class UserRegistrationView(FormView):
     form_class = UserRegistrationForm
     template_name = 'accounts/user_registration.html'
-    success_url = reverse_lazy('RegistrationPage')
+    success_url = reverse_lazy('ProfilePage')
 
     def form_valid(self, form):
         user = form.save()
@@ -21,7 +21,25 @@ class UserLoginView(LoginView):
     template_name = 'accounts/login.html'
 
     def get_success_url(self):
-        return reverse_lazy('HomePage')
+        return reverse_lazy('ProfilePage')
     
 class UserLogoutView(LogoutView):
-    next_page = reverse_lazy('LoginPage')
+    def get_success_url(self):
+        if self.request.user.is_authenticated:
+            logout(self.request)
+        return reverse_lazy('HomePage')
+
+class UserProfileUpdateView(View):
+    template_name = 'accounts/profile.html'
+
+    def get(self, request):
+        form = UserUpdateForm(instance= request.user)
+        return render(request, self.template_name, {'form' : form})
+    
+    def post(self, request):
+        form = UserUpdateForm(data= request.POST, instance= request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('ProfilePage')
+        
+        return render(request, self.template_name, {'form' : form})
