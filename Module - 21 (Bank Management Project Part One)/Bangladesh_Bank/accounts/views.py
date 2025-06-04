@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 class UserRegistrationView(FormView):
     form_class = UserRegistrationForm
     template_name = 'accounts/user_registration.html'
-    success_url = reverse_lazy('ProfilePage')
+    success_url = reverse_lazy('profile')
 
     def form_valid(self, form):
         user = form.save()
@@ -21,13 +21,13 @@ class UserLoginView(LoginView):
     template_name = 'accounts/login.html'
 
     def get_success_url(self):
-        return reverse_lazy('ProfilePage')
+        return reverse_lazy('profile')
     
 class UserLogoutView(LogoutView):
     def get_success_url(self):
         if self.request.user.is_authenticated:
             logout(self.request)
-        return reverse_lazy('HomePage')
+        return reverse_lazy('login')
 
 class UserProfileUpdateView(View):
     template_name = 'accounts/profile.html'
@@ -40,6 +40,6 @@ class UserProfileUpdateView(View):
         form = UserUpdateForm(data= request.POST, instance= request.user)
         if form.is_valid():
             form.save()
-            return redirect('ProfilePage')
+            return redirect('profile')
         
         return render(request, self.template_name, {'form' : form})

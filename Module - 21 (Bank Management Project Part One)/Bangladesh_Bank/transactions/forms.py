@@ -5,31 +5,31 @@ from .models import Transaction
 class TransactionForm(forms.ModelForm):
     class Meta :
         model = Transaction
-        fields = ['account', 'transaction_type']
+        fields = ['amount', 'transaction_type']
 
     def __init__(self, *args, **kwargs):
         # user account object will be given as kwargs petameter
-        self.user_account = kwargs.get('account') # this contains an object of the User's UserBankAccount model
+        self.account = kwargs.pop('account') # this contains an object of the User's UserBankAccount model
         super().__init__(*args, **kwargs)
         
         # making the transaction_type hidden for user in frontend. it will be handled maually
         self.fields['transaction_type'].disabled = True
-        self.fields['transaction_type'].widget = forms.hiddenInput() 
+        self.fields['transaction_type'].widget = forms.HiddenInput() 
 
     def save(self, commit= True):
-        self.instance.account = self.user_account  # here self.instance is the instance or object of Transaction modelf. here in it's account field i am assigning the user_account object 
-        self.instance.balance_after_transection = self.user_account.balance  # balance_after_transection is being updated with new balance
+        self.instance.account = self.account  # here self.instance is the instance or object of Transaction modelf. here in it's account field i am assigning the user_account object 
+        self.instance.balance_after_transaction = self.account.balance  # balance_after_transection is being updated with new balance
         return super().save()
 
 
-class DipositForm(TransactionForm):
+class DepositForm(TransactionForm):
     # this method is used to validate any form field's input data by naming the it as clean_fieldname
     def clean_amount(self):
         amount = self.cleaned_data["amount"]
-        min_diposit_amount = 100
+        min_deposit_amount = 100
 
-        if amount < min_diposit_amount :
-            raise forms.ValidationError(f"Diposit Amount must be at least {min_diposit_amount} $")
+        if amount < min_deposit_amount :
+            raise forms.ValidationError(f"Diposit Amount must be at least {min_deposit_amount} $")
         
         return amount
     
