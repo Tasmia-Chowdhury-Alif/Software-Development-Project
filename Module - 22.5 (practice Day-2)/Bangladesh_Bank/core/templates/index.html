@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}Banking System{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container mx-auto max-w-7xl my-12 md:my-24 px-4 ">
+  <div class="flex flex-col md:flex-row gap-24 ">
+
+    <!-- Left Container -->
+    <div class="w-full md:w-1/2">
+      <div class="h-full flex flex-col justify-center items-center p-8 bg-white bg-opacity-70 rounded-2xl shadow text-center space-y-6">
+        <h1 class="font-bold text-4xl">Welcome to Mamar Bank</h1>
+        <p class="text-base leading-relaxed">
+          This is a simple Mamar Bank where you can deposit money, withdraw money, and take loans. You can also create an account, login, logout. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nemo quaerat quo dicta, adipisci eum fuga ratione id numquam eius veniam placeat voluptatum, itaque tempora molestias vel, blanditiis fugiat ipsam!
+        </p>
+        <a href="{% url 'registration' %}" class="bg-blue-900 text-white hover:bg-white hover:text-blue-900 border border-blue-900 rounded shadow py-2 px-6 transition">
+          Register
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Container -->
+    <div class="w-full md:w-1/2">
+      <div class="h-full">
+        <img src="{% static './img/bank.jpg' %}" alt="Bank Image"
+             class="rounded-2xl w-full h-full object-cover shadow" />
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+{% endblock body %}
