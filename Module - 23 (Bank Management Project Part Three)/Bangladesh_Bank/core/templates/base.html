@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block head_title %}Banking System{% endblock head_title %}
+    </title>
+
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    
+        {% block head_extra %}{% endblock %}
+        <style>
+            footer {
+                position: fixed !important;
+                bottom: 0 !important;
+                width: 100%;
+            }
+        </style>
+
+</head>
+
+<body class="bg-indigo-600">
+    <header>
+        {% include "navbar.html" %}
+    </header>
+
+    <main>
+        <div class="lg:container lg:mx-auto" id="main">
+            {% include 'messages.html' %}
+            {% block body %}
+            {% endblock body %}
+        </div>
+
+    </main>
+
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+
+</html>
