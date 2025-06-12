@@ -1,0 +1,24 @@
+
+
+
+<div style="background: linear-gradient(135deg, #ecfdf5, #d1fae5); padding: 32px; font-family: 'Helvetica Neue', Arial, sans-serif; color: #333;">
+    <h2 style="margin-top: 0; color: #065f46;">Loan Approved!</h2>
+    <p>Hi {{ user.first_name }} {{ user.last_name }},</p>
+    <p>
+        Congratulations — your loan of <strong>${{ amount }}</strong> has been approved.
+    </p>
+    <p>
+        💵 After Transaction your account balance is <strong>${{ user.account.balance }}</strong>
+    </p>
+    <hr style="border: none; height: 1px; background: #6ee7b7; margin: 24px 0;" />
+    <p style="margin-bottom: 0;">We appreciate your trust in BD Bank.</p>
+    <p style="font-weight: bold; color: #065f46; margin-top: 4px;">BD Bank</p>
+</div>
+
+{% comment %} <h3>Hello {{ user.first_name }} {{ user.last_name }}</h3>
+
+<h2>Congratulations!! Your Loan Request has been approved</h2>
+<p>After loan approval your account balance is ${{ user.account.balance }}</p>
+
+<p>Thanks for banking with us</p>
+<p>BD Bank</p> {% endcomment %}

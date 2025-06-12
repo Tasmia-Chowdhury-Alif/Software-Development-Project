@@ -1,0 +1,23 @@
+
+
+
+<div style="background: linear-gradient(135deg, #fff5f5, #ffe3e3); padding: 32px; font-family: 'Helvetica Neue', Arial, sans-serif; color: #333;">
+    <h2 style="margin-top: 0; color: #b91c1c;">Withdrawal Completed</h2>
+    <p>Hi {{ user.first_name }} {{ user.last_name }},</p>
+    <p>
+        Your withdrawal of <strong>${{ amount }}</strong> has been processed successfully.
+    </p>
+    <p>
+        💰 After Transaction your account balance is <strong>${{ user.account.balance }}</strong>
+    </p>
+    <hr style="border: none; height: 1px; background: #fca5a5; margin: 24px 0;" />
+    <p style="margin-bottom: 0;">Thank you for banking with us!</p>
+    <p style="font-weight: bold; color: #b91c1c; margin-top: 4px;">BD Bank</p>
+</div>
+
+{% comment %} <h3>Hello {{ user.first_name }} {{ user.last_name }}</h3>
+
+<p>Your Withdrawal request for ${{ amount }} has been successfully completed. After Withdrawal your account balance is ${{ user.account.balance }}</p>
+
+<p>Thanks for banking with us</p>
+<p>BD Bank</p> {% endcomment %}

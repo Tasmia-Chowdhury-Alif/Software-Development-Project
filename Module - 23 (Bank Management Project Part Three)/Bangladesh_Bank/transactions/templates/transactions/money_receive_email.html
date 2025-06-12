@@ -1,0 +1,26 @@
+
+
+
+<div style="background: linear-gradient(135deg, #f0fdfa, #a7f3d0); padding: 32px; font-family: 'Helvetica Neue', Arial, sans-serif; color: #333;">
+    <h2 style="margin-top: 0; color: #047857;">Funds Received</h2>
+    <p>Hi {{ user.first_name }} {{ user.last_name }},</p>
+    <p>
+        You’ve received <strong>${{ amount }}</strong> in your account.
+    </p>
+    <p>
+        💳 After Transaction your account balance is <strong>${{ user.account.balance }}</strong>
+    </p>
+    <hr style="border: none; height: 1px; background: #6ee7b7; margin: 24px 0;" />
+    <p style="margin-bottom: 0;">Thanks for choosing BD Bank!</p>
+    <p style="font-weight: bold; color: #047857; margin-top: 4px;">BD Bank</p>
+</div>
+
+
+
+
+{% comment %} <h3>Hello {{ user.first_name }} {{ user.last_name }}</h3>
+
+<p>You Recived ${{ amount }} successfully. After Transaction your account balance is ${{ user.account.balance }}</p>
+
+<p>Thanks for banking with us</p>
+<p>BD Bank</p> {% endcomment %}

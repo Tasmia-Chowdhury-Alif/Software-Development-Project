@@ -1,7 +1,24 @@
-<h1>Hello {{ user.first_name }} {{ user.last_name }}</h1>
+
+
+
+<div style="background: linear-gradient(135deg, #f0f4ff, #d9e2ff); padding: 32px; font-family: 'Helvetica Neue', Arial, sans-serif; color: #333;">
+    <h2 style="margin-top: 0; color: #1e3a8a;">Deposit Successful</h2>
+    <p>Hi {{ user.first_name }} {{ user.last_name }},</p>
+    <p>
+        Your deposit of <strong>${{ amount }}</strong> was successful.
+    </p>
+    <p>
+        🎉 After Transaction your account balance is <strong>${{ user.account.balance }}</strong>
+    </p>
+    <hr style="border: none; height: 1px; background: #cbd5e1; margin: 24px 0;" />
+    <p style="margin-bottom: 0;">Thank you for banking with us!</p>
+    <p style="font-weight: bold; color: #1e3a8a; margin-top: 4px;">BD Bank</p>
+</div>
+
+{% comment %} <h3>Hello {{ user.first_name }} {{ user.last_name }}</h3>
 
 <p>Your Deposit request for amount ${{ amount }} has been Successfull.</p>
 <p>After Deposit your account balance is ${{ user.account.balance }}</p>
 
 <p>Thanks for Banking with us</p>
-<p>BD Bank</p>
+<p>BD Bank</p> {% endcomment %}

@@ -13,6 +13,16 @@ from datetime import datetime
 from django.db.models import Sum
 from django.urls import reverse_lazy
 
+def send_transaction_email(user, amount, subject, message_template):
+    message = render_to_string(message_template, context={
+        'user' : user, 
+        'amount' : amount,
+    })
+    send_email = EmailMultiAlternatives(subject, to=[user.email])
+    send_email.attach_alternative(message, "text/html")
+    send_email.send()
+
+
 # Create your views here.
 class TransactionCreateMixin(LoginRequiredMixin, CreateView):
     model = Transaction
@@ -58,15 +68,17 @@ class DepositMoneyView(TransactionCreateMixin):
             f'{"{:,.2f}".format(float(amount))}$ was deposited to your account successfully'
         )
 
-        email_subject = "Deposit Message"
-        message = render_to_string('transactions/diposit_email.html', context={
-            'user' : self.request.user, 
-            'amount' : amount,
-        })
-        email_to = self.request.user.email
-        send_email = EmailMultiAlternatives(email_subject, to=[email_to])
-        send_email.attach_alternative(message, "text/html")
-        send_email.send()
+        # email_subject = "Deposit Message"
+        # message = render_to_string('transactions/diposit_email.html', context={
+        #     'user' : self.request.user, 
+        #     'amount' : amount,
+        # })
+        # email_to = self.request.user.email
+        # send_email = EmailMultiAlternatives(email_subject, to=[email_to])
+        # send_email.attach_alternative(message, "text/html")
+        # send_email.send()
+
+        send_transaction_email(self.request.user, amount, "Deposit Message", 'transactions/diposit_email.html')
 
         return super().form_valid(form)
     
@@ -86,6 +98,7 @@ class WithdrawMoneyView(TransactionCreateMixin):
         if account.bank.is_bankrupt :
             messages.error(self.request, "Sorry, withdrawals are disabled because the bank is bankrupt.")
             return redirect("home")
+        
         account.balance -= amount 
         account.save(
             update_fields = ['balance']
@@ -95,6 +108,8 @@ class WithdrawMoneyView(TransactionCreateMixin):
             self.request,
             f'Successfully withdrawn {"{:,.2f}".format(float(amount))}$ from your account'
         )
+
+        send_transaction_email(account.user, amount, "Withdrawl Message", 'transactions/withdraw_email.html')
 
         return super().form_valid(form)
     
@@ -119,6 +134,8 @@ class LoanRequestView(TransactionCreateMixin):
             self.request,
             f'Loan request for {"{:,.2f}".format(float(amount))}$ submitted successfully'
         )
+
+        send_transaction_email(self.request.user, amount, "Loan Request Message", 'transactions/loan_request_email.html')
 
         return super().form_valid(form)
     
@@ -233,6 +250,11 @@ class TransferMoneyView(TransactionCreateMixin):
             f'{"{:,.2f}".format(float(amount))}$ was Transfered to {receiver_account_no} successfully'
         )
 
+        # sending email to Money Transferer (sender)
+        send_transaction_email(self.request.user, amount, "Money Transfer Message", 'transactions/money_transfer_email.html')
+
+        # sending email to Money Receiver 
+        send_transaction_email(receiver_account.user, amount, "Money Recived Message", 'transactions/money_receive_email.html')
 
         return super().form_valid(form)
     
