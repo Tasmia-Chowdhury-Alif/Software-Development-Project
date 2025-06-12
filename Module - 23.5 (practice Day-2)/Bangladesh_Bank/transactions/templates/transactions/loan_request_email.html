@@ -1,0 +1,20 @@
+
+
+<div style="background: linear-gradient(135deg, #fffbeb, #fff1c2); padding: 32px; font-family: 'Helvetica Neue', Arial, sans-serif; color: #333;">
+    <h2 style="margin-top: 0; color: #b45309;">Loan Request Received</h2>
+    <p>Hi {{ user.first_name }} {{ user.last_name }},</p>
+    <p>
+        We’ve received your loan request for <strong>${{ amount }}</strong>.
+    </p>
+    <p>🔔 An administrator will review your request shortly. Once approved, you’ll receive another confirmation email and the funds will be added to your account.</p>
+    <hr style="border: none; height: 1px; background: #fde68a; margin: 24px 0;" />
+    <p style="margin-bottom: 0;">Thanks for choosing BD Bank!</p>
+    <p style="font-weight: bold; color: #b45309; margin-top: 4px;">BD Bank</p>
+</div>
+
+{% comment %} <h3>Hello {{ user.first_name }} {{ user.last_name }}</h3>
+
+<p>Your Loan request for ${{ amount }} has been successfully sent to admin. Wait for admin approval. After getting admin approval you will get the loan and also get a confirmation mail</p>
+
+<p>Thanks for banking with us</p>
+<p>BD Bank</p> {% endcomment %}
