@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center flex-wrap mx-5 ">
+        <div class="col-6 " style="padding: 0px 100px 0px 40px;">
+            <h1>Wellcome to Library Management</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, voluptatum nesciunt odit dicta facere ducimus rem molestias amet, reprehenderit facilis eaque repellendus deleniti corporis modi earum tempore iste neque! Dignissimos veritatis laudantium voluptates laboriosam maiores tempora assumenda mollitia perspiciatis corrupti sapiente eos vitae soluta, itaque sit numquam beatae nihil commodi expedita iure. Quisquam eligendi ullam mollitia soluta recusandae quod placeat at odio autem consequuntur doloribus quibusdam corrupti veniam delectus vero molestias, nulla facilis vitae dolor sapiente dicta! Asperiores impedit ipsum suscipit dolores tempore nemo repellendus hic, sit cumque omnis dicta, illum laborum sint numquam necessitatibus dolor ut recusandae quaerat rerum.</p>
+        </div>
+        <div class="col-6">
+            <img style="width: 100%; height: 840px;" src="{% static 'images/home-image.jpg' %}" />
+        </div>
+        
+    </div>
+    
+    
+    <div class="d-flex flex-wrap py-4 d-flex justify-content-center">
+        <div class="bg-white rounded p-4 text-center" style="margin-top: 100px; width: 80%;">
+            <h4 class="pb-4">All Categories</h4>
+            {% for category in categories %}
+                <div class="d-inline mx-3">
+                    <input class="form-check-input" type="radio" name="category" id="flexRadioDefault{{category.id}}" onclick="location.href='{% url 'category-wise' category.slug %}';" >
+                    <label class="form-check-label ps-2" for="flexRadioDefault{{category.id}}">
+                        {{category.name}}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+            
+        <div class="text-center text-success p-3 mx-auto " style="width: 95%; margin-top: 40px; margin-bottom: 40px;">
+            <h1 >Results found : {{ books | length }}</h1>
+        </div>
+        
+        <div class="my-2 row d-flex justify-content-evenly" style="width: 80%;"> 
+            {% for book in books %}
+                <div class="col-sm-6 " style="width: 40%;">
+                    <div class="card my-3 p-3" >
+                        <div class="card-body">
+                            {% if book.image %}
+                        
+                            <div class="text-center">
+                                <img src="{{ book.image.url }}" class="card-img-top mx-auto" alt="" style="width: 80%; height: auto;">
+                            </div>
+
+
+                            {% endif %}
+
+                            <h4 class="card-title mt-4">{{ book.title }}</h4>
+                            <p class="card-text">{{ book.description | truncatewords:40 }}</a></p> 
+                            <p class="card-text">Price : {{ book.price }} Taka</p>
+                            <p>Category : 
+                                {% for cat in book.category.all %}
+                                    <button class="btn btn-info btn-sm m-2">{{ cat.name }}</button>
+                                {% endfor %}
+                            </p>
+                            <a class="btn btn-warning btn-sm text-decoration-none text-black" href="{% url 'details' book.id %}">View Details</a> 
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}
