@@ -2,6 +2,49 @@
 
 {% block content %}
 
-     <h1>Profile Page</h1>
+    <h1>Profile Page</h1>
+    <a href="{% url "deposite" %}">Deposit Money To Your Account</a>
+
+
+    <table class="table table-bordered w-75 mx-auto">
+        <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Book Name</th>
+                  <th scope="col">Borrow Price</th>
+                  <th scope="col">Borrow Date</th>
+                  <th scope="col">Balance After Borrow</th>
+                  <th scope="col">Return Date</th>
+                  <th scope="col">Balance After Return</th>
+                  <th scope="col">Return Book</th>
+              </tr>
+        </thead>
+        <tbody>
+            {% for borrow in borrow_history %}
+               <tr>
+                   <th scope="row">{{ borrow.id }}</th>
+                   <td scope="row">{{ borrow.book.title }}</td>
+                   <td scope="row">{{ borrow.book.price }}</td>
+                   <td scope="row">{{ borrow.borrow_date }}</td>
+                   <td scope="row">{{ borrow.balance_after_borrow }}</td>
+                   <td scope="row">{{ borrow.return_date }}</td>
+                   <td scope="row">{{ borrow.balance_after_return }}</td>
+                   {% if borrow.is_returned %}
+                       <td>
+                         <p class="text-success fs-italic">Returned</p>
+                       </td>
+                   {% else %}
+                       <td>
+                           <form method="post" action="{% url 'return' borrow.id  %}">
+                               {% csrf_token %}
+                               <button class="btn btn-danger" type="submit">Return</button>
+                           </form>
+                       </td>
+                   {% endif %}
+               </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock content %}

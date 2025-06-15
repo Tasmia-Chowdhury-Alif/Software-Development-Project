@@ -47,7 +47,7 @@
 
                             <h4 class="card-title mt-4">{{ book.title }}</h4>
                             <p class="card-text">{{ book.description | truncatewords:40 }}</a></p> 
-                            <p class="card-text">Price : {{ book.price }} Taka</p>
+                            <p class="card-text">Borrow Price : {{ book.price }} Taka</p>
                             <p>Category : 
                                 {% for cat in book.category.all %}
                                     <button class="btn btn-info btn-sm m-2">{{ cat.name }}</button>

@@ -18,19 +18,24 @@
                     
                     <h1 class="card-title ">{{ book.title }}</h1>
                     <p class="card-text"><b>Description :</b> {{ book.description }}</p>
-                    <p>Category : 
+                    <p class="card-text"><b>Borrow Price :</b> {{ book.price }} Taka</p>
+                    <p><b>Category : </b>
                         {% for cat in book.category.all %}
                            <button class="btn btn-info btn-sm m-2">{{ cat.name }}</button>
                         {% endfor %}
                     </p>
-                    <p class="card-text"><b>Price :</b> {{ book.price }} Taka</p>
                     
-                    {% comment %} {% if request.user.is_authenticated %}
-                    <form method="post" action="{% url 'BuyNowPage' book.id %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-success ">Buy Now</button>
-                    </form>
-                    {% endif %} {% endcomment %}
+                    {% if request.user.is_authenticated %}
+                        {% if book.is_borrowed %}
+                            <i class="text-danger"> Not Available For Now</i>
+                        {% else %}
+                        <form method="post" action="{% url 'borrow' book.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success ">Borrow</button>
+                        </form>
+                        {% endif %}
+
+                    {% endif %}
                 </div>
                 
             </div>
@@ -41,19 +46,20 @@
 
     <div class="card mx-3 p-3">
         <div class="card-body">
-            <h5>Total comment's : {{ comments | length }}</h5>
+            <h5>Total Reviews : {{ reviews | length }}</h5>
             
-            {% for comment in comments %}
+            {% for review in reviews %}
                 <div class="card p-3 mb-3 mx-auto" style="width: 50%;">
                     <div class="card-body">
                         <div class="d-flex mb-3">
                             {% comment %} <img src="" class="rounded-circle me-3" alt="User Avatar"> {% endcomment %}
                             <div class="d-flex align-items-center w-100">
-                                <h5 class="card-title mb-0">{{ comment.name }}</h5>
-                                <small class="text-muted ms-auto" style="">Commented on {{ comment.created_at }}</small>
+                                <h5 class="card-title mb-0">{{ review.user.first_name }} {{ review.user.last_name }}</h5>
+                                <small class="text-muted ms-auto" >Reviewed on {{ review.date }}</small>
                             </div>
                         </div>
-                        <p class="card-text">{{ comment.comment }}</p>
+                        <p class="card-text">{{ review.get_ratting_display }}</p>
+                        <p class="card-text">{{ review.review }}</p>
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-sm btn-outline-primary me-2">
                                 <i class="bi bi-hand-thumbs-up"></i> Like
@@ -69,13 +75,15 @@
     </div>
 
 
-    <div class="bg-white m-3 p-5 rounded">
-        <form class="w-50 m-auto" method="post" >
-            <h1 class="text-center">Comments</h1>
-            {% csrf_token %}
-            {{ form | crispy }}
-            <button class="btn btn-info " style="color: navy ;" type="submit">Comment</button>
-        </form>
-    </div>
+    {% if user_ever_borrowed %}
+        <div class="bg-white m-3 p-5 rounded">
+            <form class="w-50 m-auto" method="post" >
+                <h1 class="text-center">Review</h1>
+                {% csrf_token %}
+                {{ form | crispy }}
+                <button class="btn btn-info " style="color: navy ;" type="submit">Submit</button>
+            </form>
+        </div>
+    {% endif %}
 
 {% endblock content %}
