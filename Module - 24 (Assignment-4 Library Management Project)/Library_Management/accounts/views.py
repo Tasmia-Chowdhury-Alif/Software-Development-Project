@@ -142,7 +142,7 @@ class DepositView(LoginRequiredMixin, FormView):
 
             messages.success(
                 self.request,
-                f'{"{:,.2f}".format(float(amount))}$ was deposited to your account successfully'
+                f'{"{:,.2f}".format(float(amount))}৳ was deposited to your account successfully'
             )
 
             send_email(user, amount, "Deposit Message", 'accounts/deposit_email.html')
