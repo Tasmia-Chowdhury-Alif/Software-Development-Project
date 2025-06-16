@@ -18,6 +18,9 @@ class Book(models.Model):
     def is_borrowed(self):
         return self.borrows.filter(return_date__isnull=True).exists()
     
+    def is_borrowed_by_current_user(self, user):
+        return self.borrows.filter(user= user, return_date__isnull=True).exists()
+    
 
 class Borrow(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="borrows")
@@ -25,7 +28,7 @@ class Borrow(models.Model):
     balance_after_borrow = models.DecimalField(max_digits= 12, decimal_places=2)
     balance_after_return = models.DecimalField(null=True, blank=True, default=None, max_digits= 12, decimal_places=2)
     borrow_date = models.DateTimeField(auto_now_add=True)
-    return_date = models.DateTimeField(null=True, blank=True) 
+    return_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.book} - {self.user}"

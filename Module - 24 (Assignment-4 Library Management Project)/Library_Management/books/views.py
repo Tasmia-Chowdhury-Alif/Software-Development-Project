@@ -7,10 +7,11 @@ from accounts.views import send_email
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.contrib import messages
+from django.urls import reverse
 
 
 # Create your views here.
-class BookDetailsView(DetailView):
+class BookDetailsView(LoginRequiredMixin, DetailView):
     model = models.Book
     # pk_url_kwarg = 'pk'
     template_name = 'books/details.html'
@@ -26,7 +27,10 @@ class BookDetailsView(DetailView):
             form_instance.user = self.request.user  
             form_instance.book = book 
             form_instance.save()
-        return self.get(request, *args, **kwargs)
+            # Redirect to the book details page
+            return redirect(reverse('details', kwargs={'pk': book.id}))
+        else:
+            return self.get(request, *args, **kwargs)
 
 
     def get_context_data(self, **kwargs):
@@ -36,6 +40,7 @@ class BookDetailsView(DetailView):
         context["form"] = forms.ReviewForm()
         context["reviews"] = reviews
         context["user_ever_borrowed"] = self.request.user.borrows.filter(book= book).exists()
+        context["is_borrowed_by_current_user"] = book.is_borrowed_by_current_user(user= self.request.user)
         return context
 
 

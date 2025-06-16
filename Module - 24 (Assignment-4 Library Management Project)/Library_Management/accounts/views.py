@@ -5,7 +5,7 @@ from books.models import Borrow
 from django.views.generic import View, FormView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import UserRegistrationForm, DepositForm
+from .forms import UserRegistrationForm, UserLoginForm, DepositForm
 from django.contrib.auth import login
 from django.db import transaction
 from django.core.mail import EmailMessage, EmailMultiAlternatives
@@ -47,13 +47,25 @@ class UserRegistrationView(FormView):
     
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
+        form = context['form']
         context["title"] = "Registration Form"
+        context['account_fields'] = [
+            form['username'], form['first_name'], form['last_name'], 
+            form['email'], form['password1'], form['password2']
+        ]
+        context['personal_fields'] = [
+            form['profile_picture'], form['birth_date'], form['gender']
+        ]
+        context['address_fields'] = [
+            form['street_address'], form['city'], form['postal_code']
+        ]
         return context
     
     
 
 class UserLoginView(LoginView):
-    template_name = 'accounts/registration.html'
+    template_name = 'accounts/login.html'
+    form_class = UserLoginForm
 
     def get_success_url(self):
         return reverse_lazy('profile')
@@ -112,7 +124,7 @@ class ReturnBookView(LoginRequiredMixin, View):
 
 class DepositView(LoginRequiredMixin, FormView):
     form_class = DepositForm
-    template_name = 'accounts/registration.html'
+    template_name = 'accounts/deposit.html'
     success_url = reverse_lazy('profile')
 
     def form_valid(self, form):
