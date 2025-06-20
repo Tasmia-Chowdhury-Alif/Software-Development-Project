@@ -10,6 +10,7 @@ const displayServices = (services) => {
     const parent = document.getElementById("service-card-container");
     services.forEach(service => {
         const li = document.createElement("li");
+        li.classList.add("slide-visible");
         li.innerHTML = `
             <div class="card shadow h-100">
                 <div class="ratio ratio-16x9">
@@ -22,9 +23,8 @@ const displayServices = (services) => {
                     </div>
                 </div>
             </div>
-        `
-        li.classList.add("slide-visible")
-        parent.appendChild(li)
+        `;
+        parent.appendChild(li);
     });
 };
 
@@ -75,15 +75,16 @@ const displayDoctors = (doctors) => {
                 <h3 class="doc-name card-title mb-2">${doctor?.full_name}</h3>
                 <p class="doc-designation card-text text-muted mb-3 fw-bold"> 
                     ${doctor?.designation?.map((item) => {
-            return `<span>${item}</span>`
-        }).join('')}
+                        return `<span>${item}</span>`
+                    }).join('')}
                 </p>
                 <p class="doc-details card-text mb-4">Passionate about creating beautiful and functional websites. Always learning and exploring new technologies.</p>
                 ${doctor?.specialization?.map((item) => {
-            return `<button type="button" class="btn btn-info btn-sm mx-1 my-1" style="background-color: rgba(0, 126, 133, 1); color: white; border: none;">${item}</button>`
-        }).join('')}
+                    return `<button type="button" class="btn btn-sm mx-1 my-1" style="background-color: rgba(0, 126, 133, 1); color: white; border: none;">${item}</button>`
+                }).join('')}
+                <button class="btn d-block mx-auto " style="background-color: rgba(0, 126, 133, 1); border: none;"><a href="doctorDetails.html?doctorId=${doctor.id}" target="_blank" style="text-decoration: none; color: white;">Details</a></button>
             </div>
-        `
+        `;
         parent.appendChild(div);
     });
 };
@@ -94,11 +95,11 @@ const loadDesignation = () => {
         .then((data) => {
             console.log(data);
             data.forEach((item) => {
-                parent = document.getElementById("dropdown-designation")
+                parent = document.getElementById("dropdown-designation");
                 const li = document.createElement("li");
                 li.innerHTML = `
                 <li class="dropdown-item" onclick="handleSearch('${item.name}')">${item?.name}</li>
-            `
+                `;
                 parent.appendChild(li);
             });
         });
@@ -110,11 +111,11 @@ const loadSpecialization = () => {
         .then((data) => {
             console.log(data);
             data.forEach((item) => {
-                parent = document.getElementById("dropdown-specialization")
+                parent = document.getElementById("dropdown-specialization");
                 const li = document.createElement("li");
                 li.innerHTML = `
-                <li class="dropdown-item" onclick="handleSearch('${item.name}')">${item?.name}</li>
-            `
+                    <li class="dropdown-item" onclick="handleSearch(${item.name})">${item?.name}</li>
+                `;
                 parent.appendChild(li);
             });
         });
@@ -134,15 +135,46 @@ const handleSearch = (search) => {
                 displayDoctors(data?.results);
             }
             else {
-                parent.innerHTML = ""
+                parent.innerHTML = "";
                 parent.innerHTML = `
                     <div id="nodata" class="w-50 mx-auto mb-auto">
                         <img src="./Images/nodata.png" alt="nodata">
                     </div>
-                `
+                `;
             }
         })
         .then((err) => console.log(err))
+}
+
+
+const loadReviews = () => {
+    fetch("https://testing-8az5.onrender.com/doctor/review/")
+        .then((res) => res.json())
+        .then((data) => displayReviews(data))
+        .catch((err) => console.log(err))
+}
+
+const displayReviews = (reviews) => {
+    const parent = document.getElementById("review-container");
+
+    reviews.forEach(review => {
+        const li = document.createElement("li");
+        li.classList.add("slide-visible", "review-card", "card", "shadow", "h-100");
+
+        li.innerHTML = `
+            <div class="review-card-body p-5 m-2">
+                <div class="d-flex align-items-center gap-3 w-100 mx-auto">
+                    <img src="./Images/girl.png" alt="" />
+                    <div>
+                        <h4>${review.reviewer}</h4>
+                        <h6>${review.rating}</h6>
+                    </div>
+                </div>
+                <p class="p-4">${review.body.slice(0, 100)}</p>
+            </div>
+        `
+        parent.appendChild(li);
+    });
 
 }
 
@@ -152,3 +184,4 @@ loadServices();
 loadDoctors();
 loadDesignation();
 loadSpecialization();
+loadReviews();

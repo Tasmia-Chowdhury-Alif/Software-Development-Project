@@ -120,8 +120,8 @@ li{
 }
 
 .doc-card {
-    width: 350px !important;
-    height: 450px !important;
+    width: 380px !important;
+    height: 500px !important;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -139,11 +139,17 @@ li{
     height: 300px;
     box-shadow: 4px 4px 8px gray;
     border-radius:10px;
-    text-align: center;
-    padding: 10px;
+    /* padding: 40px 40px 40px 80px; */
 }
 .review-card img{
     width: 70px;
     height: 70px;
     border-radius:50px;
+}
+
+
+footer{
+    padding: 50px;
+    color: white;
+    background: linear-gradient(66deg, #1CA8C7 -5.25%, #439FA5 46.76%, #4C7D8C 98.77%);;
 }
