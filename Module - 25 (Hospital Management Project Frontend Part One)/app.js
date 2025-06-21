@@ -126,7 +126,7 @@ const handleSearch = () => {
         .then((res) => res.json())
         .then((data) => {
             const parent = document.getElementById("doctors");
-            // parent.innerHTML = ``
+            parent.innerHTML = ``
             displayDoctors(data?.results);
         })
         .then((err) => console.log(err))
