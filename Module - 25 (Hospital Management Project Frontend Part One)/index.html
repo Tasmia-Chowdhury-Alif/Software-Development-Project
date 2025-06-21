@@ -21,10 +21,10 @@
                 <img class="nav-brand" src="./Images/SmartCare.png" alt="">
             </div>
             <div class="menu-container d-flex gap-4">
-                <li class="menu"><a href="index.html">Home</a></li>
+                <li class="menu">Home</li>
                 <li class="menu">Services</li>
                 <li class="menu">Contact us</li>
-                <li class="menu"><a href="login.html">Login</a></li>
+                <li class="menu">Login</li>
             </div>
         </nav>
 
@@ -102,13 +102,11 @@
                 </div>
             </div>
             <div class="col-md-9 px-0">
-                <div class="d-flex align-items-center pb-5">
-                    <input id="search" class="form-control my-auto p-3 px-5 " type="text" placeholder="Search Doctors...">
-                    <button id="search-btn" class="my-auto px-3 py-2 rounded-4" onclick="callSearch()">Search</button>
-                </div>
+                <input id="search" class="p-3 px-5 mb-5" type="text" placeholder="Search Doctors...">
+                <button id="search-btn" class="px-3 py-2 rounded-4" onclick="callSearch()">Search</button>
 
                 <div id="doctors"
-                    class="doctors container row gap-5 d-flex justify-content-evenly align-items-center ">
+                    class="doctors container row gap-5 d-flex justify-content-evenly align-items-center min-vh-100">
 
                     <div id="loading" class="w-50 mt-3 mx-auto mb-auto">
                         <h3>Loading ...</h3>
