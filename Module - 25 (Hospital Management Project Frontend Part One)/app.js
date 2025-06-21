@@ -6,7 +6,7 @@ const loadServices = () => {
 };
 
 const displayServices = (services) => {
-    console.log(services);
+    // console.log(services);
     const parent = document.getElementById("service-card-container");
     services.forEach(service => {
         const li = document.createElement("li");
@@ -78,7 +78,7 @@ const displayDoctors = (doctors) => {
                         return `<span>${item}</span>`
                     }).join('')}
                 </p>
-                <p class="doc-details card-text mb-4">Passionate about creating beautiful and functional websites. Always learning and exploring new technologies.</p>
+                <p class="doc-details card-text mb-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia consequuntur alias mollitia repellat ipsa aperiam natus commodi neque amet eius?</p>
                 ${doctor?.specialization?.map((item) => {
                     return `<button type="button" class="btn btn-sm mx-1 my-1" style="background-color: rgba(0, 126, 133, 1); color: white; border: none;">${item}</button>`
                 }).join('')}
@@ -93,7 +93,7 @@ const loadDesignation = () => {
     fetch("https://testing-8az5.onrender.com/doctor/designation/")
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             data.forEach((item) => {
                 parent = document.getElementById("dropdown-designation");
                 const li = document.createElement("li");
@@ -109,7 +109,7 @@ const loadSpecialization = () => {
     fetch("https://testing-8az5.onrender.com/doctor/specialization/")
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             data.forEach((item) => {
                 parent = document.getElementById("dropdown-specialization");
                 const li = document.createElement("li");
@@ -143,7 +143,7 @@ const handleSearch = (search) => {
                 `;
             }
         })
-        .then((err) => console.log(err))
+        .catch((err) => console.log(err))
 }
 
 
@@ -176,7 +176,7 @@ const displayReviews = (reviews) => {
         parent.appendChild(li);
     });
 
-}
+};
 
 
 
