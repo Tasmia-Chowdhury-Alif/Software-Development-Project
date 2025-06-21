@@ -101,24 +101,6 @@ li{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown-bg{
-    color: white !important;
-    background-color: rgba(6, 171, 161, 1) !important;
-}
-
-.dropdown-menu{
-    background-color: rgba(113, 215, 203, 1) !important;
-}
-
-.dropdown-item{
-    color: white !important;
-}
-
-.dropdown-item:hover{
-    background-color: rgba(6, 171, 161, 1) !important;
-
-}
-
 .doc-card {
     width: 350px !important;
     height: 450px !important;
@@ -132,18 +114,4 @@ li{
     object-fit: cover;
     border: 4px solid #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.review-card{
-    width: 250px;
-    height: 300px;
-    box-shadow: 4px 4px 8px gray;
-    border-radius:10px;
-    text-align: center;
-    padding: 10px;
-}
-.review-card img{
-    width: 70px;
-    height: 70px;
-    border-radius:50px;
 }

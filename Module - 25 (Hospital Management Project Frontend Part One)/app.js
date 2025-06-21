@@ -1,5 +1,5 @@
 const loadServices = () => {
-    fetch("https://testing-8az5.onrender.com/services/")
+    fetch("https://testing-8az5.onrender.com/service")
         .then((response) => response.json())
         .then((data) => displayServices(data))
         .catch((err) => console.log(err))
@@ -32,7 +32,7 @@ const displayServices = (services) => {
 //     fetch("https://testing-8az5.onrender.com/doctor/list/")
 //         .then(res => res.json())
 //         .then(data => displayDoctors(data?.results))
-//         .catch((err) => console.log(err))
+//         .then((err) => console.log(err))
 // };
 
 
@@ -56,7 +56,7 @@ const loadDoctors = async (startUrl = "https://testing-8az5.onrender.com/doctor/
             url = data.next;
         }
 
-        displayDoctors(doctors);
+        displayDoctors(doctors);           // render once, after everything is in
     }
     catch (err) {
         console.error("Could not load doctors:", err);
@@ -65,7 +65,6 @@ const loadDoctors = async (startUrl = "https://testing-8az5.onrender.com/doctor/
 
 const displayDoctors = (doctors) => {
     const parent = document.getElementById("doctors");
-    parent.innerHTML = "";
     doctors.forEach(doctor => {
         const div = document.createElement("div");
         div.classList.add("doc-card", "card", "rounded-5", "col-md-4");
@@ -75,13 +74,13 @@ const displayDoctors = (doctors) => {
                 <h3 class="doc-name card-title mb-2">${doctor?.full_name}</h3>
                 <p class="doc-designation card-text text-muted mb-3 fw-bold"> 
                     ${doctor?.designation?.map((item) => {
-            return `<span>${item}</span>`
-        }).join('')}
+                        return `<span>${item}</span>`
+                    }).join('')}
                 </p>
                 <p class="doc-details card-text mb-4">Passionate about creating beautiful and functional websites. Always learning and exploring new technologies.</p>
                 ${doctor?.specialization?.map((item) => {
-            return `<button type="button" class="btn btn-info btn-sm mx-1 my-1" style="background-color: rgba(0, 126, 133, 1); color: white; border: none;">${item}</button>`
-        }).join('')}
+                    return `<button type="button" class="btn btn-info btn-sm mx-1 my-1" style="background-color: rgba(0, 126, 133, 1); color: white; border: none;">${item}</button>`
+                }).join('')}
             </div>
         `
         parent.appendChild(div);
@@ -90,57 +89,45 @@ const displayDoctors = (doctors) => {
 
 const loadDesignation = () => {
     fetch("https://testing-8az5.onrender.com/doctor/designation/")
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            data.forEach((item) => {
-                parent = document.getElementById("dropdown-designation")
-                const li = document.createElement("li");
-                li.innerHTML = `
-                <li class="dropdown-item" onclick="handleSearch('${item.name}')">${item?.name}</li>
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data);
+        data.forEach((item) => {
+            parent = document.getElementById("dropdown-designation")
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <a class="dropdown-item" href="">${item?.name}</a>
             `
-                parent.appendChild(li);
-            });
+            parent.appendChild(li);
         });
+    });
 };
 
 const loadSpecialization = () => {
     fetch("https://testing-8az5.onrender.com/doctor/specialization/")
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            data.forEach((item) => {
-                parent = document.getElementById("dropdown-specialization")
-                const li = document.createElement("li");
-                li.innerHTML = `
-                <li class="dropdown-item" onclick="handleSearch('${item.name}')">${item?.name}</li>
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data);
+        data.forEach((item) => {
+            parent = document.getElementById("dropdown-specialization")
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <a class="dropdown-item" href="">${item?.name}</a>
             `
-                parent.appendChild(li);
-            });
+            parent.appendChild(li);
         });
+    });
 };
 
-const callSearch = () => {
-    const value = document.getElementById("search").value;
-    handleSearch(value);
-}
-
-const handleSearch = (search) => {
-    fetch(`https://testing-8az5.onrender.com/doctor/list/?search=${search ? search : ""}`)
+const handleSearch = () => {
+    const search = document.getElementById("search").value ;
+    fetch(`https://testing-8az5.onrender.com/doctor/list/?search=${
+        search ? search : ""}`)
         .then((res) => res.json())
         .then((data) => {
             const parent = document.getElementById("doctors");
-            if (data.results.length > 0) {
-                displayDoctors(data?.results);
-            }
-            else {
-                parent.innerHTML = ""
-                parent.innerHTML = `
-                    <div id="nodata" class="w-50 mx-auto mb-auto">
-                        <img src="./Images/nodata.png" alt="nodata">
-                    </div>
-                `
-            }
+            parent.innerHTML = ``
+            displayDoctors(data?.results);
         })
         .then((err) => console.log(err))
 
