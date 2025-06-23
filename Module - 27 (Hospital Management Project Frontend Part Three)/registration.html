@@ -27,6 +27,17 @@
                 <li class="menu">Services</li>
                 <li class="menu">Contact us</li>
                 <li class="menu"><a href="login.html">Login</a></li>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle dropdown-bg" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Profile
+                    </button>
+                    <ul class="dropdown-menu ">
+                        <li class="dropdown-item" ><a href="userDetails.html">Profile</a></li>
+                        <li class="dropdown-item" ><a href="allAppointments.html">All Appointments</a></li>
+                        <li class="dropdown-item" ><a href="">Logout</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
@@ -43,6 +54,7 @@
                 <form action="" onsubmit="handelRegistration(event)">
                     <h5 class="ms-4 ps-3" style="text-align: start;">Username</h5>
                     <input 
+                    value="alif"
                     id="username" 
                     type="text" 
                     class="input form-control m-3 p-4 rounded-5" 
@@ -51,6 +63,7 @@
                     />
                     <h5 class="ms-4 ps-3" style="text-align: start;">First Name</h5>
                     <input 
+                    value="Tasmia Chowdhury"
                     id="first_name" 
                     type="text" 
                     class="input form-control m-3 p-4 rounded-5" 
@@ -59,6 +72,7 @@
                     />
                     <h5 class="ms-4 ps-3" style="text-align: start;">Last Name</h5>
                     <input 
+                    value="Alif"
                     id="last_name" 
                     type="text" 
                     class="input form-control m-3 p-4 rounded-5" 
@@ -68,6 +82,7 @@
                     
                     <h5 class="ms-4 ps-3" style="text-align: start;">Email</h5>
                     <input 
+                    value="tasmiachowdhuryalif222@gmail.com"
                     id="email" 
                     type="email" 
                     class="input form-control m-3 p-4 rounded-5" 
@@ -76,6 +91,7 @@
                     />
                     <h5 class="ms-4 ps-3" style="text-align: start;">Password</h5>
                     <input 
+                    value="12345@alif"
                     id="password" 
                     type="password" 
                     class="input form-control m-3 p-4 rounded-5" 
@@ -84,6 +100,7 @@
                     />
                     <h5 class="ms-4 ps-3" style="text-align: start;">Confirm Password</h5>
                     <input 
+                    value="12345@alif"
                     id="confirm_password" 
                     type="password" 
                     class="input form-control m-3 p-4 rounded-5" 
@@ -93,7 +110,7 @@
                     <p id="error" class="py-2">
 
                     </p>
-                    <input type="submit" class="submit-btn m-3 rounded-5" value="Registration" />
+                    <input type="submit" class="submit-btn input m-3 rounded-5" value="Submit" />
                     <p><a href="login.html">go to login page</a></p>
                 </form>
             </div>

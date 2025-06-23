@@ -27,6 +27,17 @@
                 <li class="menu">Services</li>
                 <li class="menu">Contact us</li>
                 <li class="menu"><a href="login.html">Login</a></li>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle dropdown-bg" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Profile
+                    </button>
+                    <ul class="dropdown-menu ">
+                        <li class="dropdown-item" ><a href="userDetails.html">Profile</a></li>
+                        <li class="dropdown-item" ><a href="allAppointments.html">All Appointments</a></li>
+                        <li class="dropdown-item" ><a href="">Logout</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
@@ -48,7 +59,7 @@
                     <h5 class="ms-4 ps-3" style="text-align: start !important;">Password</h5>
                     <input id="login-password" type="password" class="input form-control m-3 p-4 rounded-5" placeholder="Type your password" required
                         value="12345@alif" />
-                    <button class="submit-btn m-3 rounded-5" type="submit" onclick="handleLogin(event)">Login</button>
+                    <button class="submit-btn input m-3 rounded-5" type="submit" onclick="handleLogin(event)">Login</button>
                     <p><a href="registration.html">go to Registration page</a></p>
                 </form>
             </div>

@@ -25,6 +25,17 @@
                 <li class="menu">Services</li>
                 <li class="menu">Contact us</li>
                 <li class="menu"><a href="login.html">Login</a></li>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle dropdown-bg" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Profile
+                    </button>
+                    <ul class="dropdown-menu ">
+                        <li class="dropdown-item" ><a href="userDetails.html">Profile</a></li>
+                        <li class="dropdown-item" ><a href="allAppointments.html">All Appointments</a></li>
+                        <li class="dropdown-item" ><a href="">Logout</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
@@ -59,7 +70,7 @@
             <div
                 class="swiffy-slider slider-item-show2 slider-item-reveal slider-nav-outside slider-nav-round slider-nav-visible slider-indicators-outside slider-indicators-round slider-indicators-dark slider-nav-animation slider-nav-animation-fadein">
                 <ul id="service-card-container" class="slider-container py-4">
-                    
+
 
                 </ul>
 
@@ -78,6 +89,7 @@
 
         <!-- All Doctors Section  -->
         <div class="doctors-container row d-flex justify-content-center mx-auto mt-5">
+            <!-- Dropdown Container  -->
             <div class="col-md-3 ">
                 <div class="d-flex justify-content-center gap-3 mt-2">
                     <div class="dropdown">
@@ -103,12 +115,12 @@
             </div>
             <div class="col-md-9 px-0">
                 <div class="d-flex align-items-center pb-5">
-                    <input id="search" class="form-control my-auto p-3 px-5 " type="text" placeholder="Search Doctors...">
+                    <input id="search" class="form-control my-auto p-3 px-5 " type="text"
+                        placeholder="Search Doctors...">
                     <button id="search-btn" class="my-auto px-3 py-2 rounded-4" onclick="callSearch()">Search</button>
                 </div>
 
-                <div id="doctors"
-                    class="doctors container row gap-5 d-flex justify-content-evenly align-items-center ">
+                <div id="doctors" class="doctors container row gap-5 d-flex justify-content-evenly align-items-center ">
 
                     <div id="loading" class="w-50 mt-3 mx-auto mb-auto">
                         <h3>Loading ...</h3>

@@ -35,7 +35,8 @@ const handelRegistration = (event) => {
                 body: JSON.stringify(info),
             })
                 .then((res) => res.json())
-                .then((data) => console.log(data));
+                .then((data) => console.log(data))
+                .catch((err) => console.log(err));
         }
         else {
             document.getElementById("error").innerHTML = `
@@ -77,13 +78,8 @@ const handleLogin = (event) => {
                     localStorage.setItem("user_id", data.user_id);
                     window.location.href = "index.html";
                 }
-
-                // if (data.token && data.user_id) {
-                    // localStorage.setItem("token", data.token);
-                    // localStorage.setItem("user_id", data.user_id);
-                //     window.location.href = "index.html";
-                // }
-            });
+            })
+            .catch((err) => console.log(err));
     }
 };
 
