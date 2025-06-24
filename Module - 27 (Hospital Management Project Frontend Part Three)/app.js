@@ -179,6 +179,29 @@ const displayReviews = (reviews) => {
 };
 
 
+const handleLogout = () => {
+    const token = localStorage.getItem("token");
+
+    fetch("https://testing-8az5.onrender.com/patient/logout/", 
+    {
+        method: "POST",
+        headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+        },
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            localStorage.removeItem("token");
+            localStorage.removeItem("user_id");
+            if (localStorage.getItem("patient_id")) {
+                localStorage.removeItem("patient_id");
+            }
+        });
+};
+
+
 
 loadServices();
 loadDoctors();
