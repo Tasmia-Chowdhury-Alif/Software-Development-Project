@@ -1,0 +1,28 @@
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .brand-title {
+            color: rgba(6, 171, 161, 1);
+            font-weight: 700;
+            font-size: 3rem;
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+        }
+        .doctor-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .highlight {
+            color: rgba(6, 171, 161, 1);
+            font-weight: 600;
+        }
