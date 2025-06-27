@@ -131,6 +131,8 @@ const handleAppointment = () => {
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
+            // redirecting the user to the pdf page
+            window.location.href = `pdf.html?doctorId=${param}`;
         });
 
 };
