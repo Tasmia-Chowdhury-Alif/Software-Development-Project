@@ -30,6 +30,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
         account = models.User(username= username, first_name= first_name, last_name= last_name, email= email)
         print(account)
         account.set_password('password')
-        print(account)
+        account.is_active = False
         account.save()
         return account
+    
+
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField(required= True)
+    password = serializers.CharField(required= True)
