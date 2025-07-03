@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from . import models
 from . import serializers
 from django.contrib.auth.tokens import default_token_generator
@@ -82,6 +83,7 @@ class LoginApiView(APIView):
                 
 
 class LogoutApiView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         request.user.auth_token.delete()
         logout(request)
