@@ -18,15 +18,24 @@ class DoctorViewset(viewsets.ModelViewSet):
     serializer_class = serializers.DoctorSerializer
     pagination_class = DoctorPagination
 
+class FilterByDoctorId(filters.BaseFilterBackend):
+    def filter_queryset(self, request, queryset, view):
+        doctor_id = request.query_params.get('doctor_id')
+        if doctor_id :
+            return queryset.filter(doctor= doctor_id)
+        return queryset
+
 class DesignationViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = models.Designation.objects.all()
     serializer_class = serializers.DesignationSerializer
+    filter_backends = [FilterByDoctorId]
 
 class SpecializationViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = models.Specialization.objects.all()
     serializer_class = serializers.SpecializationSerializer
+    filter_backends = [FilterByDoctorId]
 
 class AvailableTimeForSpecificDoctor(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
@@ -41,15 +50,9 @@ class AvailableTimeViewset(viewsets.ModelViewSet):
     serializer_class = serializers.AvailableTimeSerializer
     filter_backends = [AvailableTimeForSpecificDoctor]
 
-class SpecificDoctorReiviews(filters.BaseFilterBackend):
-    def filter_queryset(self, request, queryset, view):
-        doctor_id = request.query_params.get('doctor_id')
-        if doctor_id :
-            return queryset.filter(doctor_id= doctor_id)
-        return queryset
 
 class ReviewViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = models.Review.objects.all()
     serializer_class = serializers.ReviewSerializer
-    filter_backends = [SpecificDoctorReiviews]
+    filter_backends = [FilterByDoctorId]
